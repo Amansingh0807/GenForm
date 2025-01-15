@@ -12,11 +12,17 @@ import { PricingPlan, pricingPlan } from "@/lib/pricingplan";
 import { Badge } from "./ui/badge";
 import {useRouter}  from "next/navigation";
 
+interface YourComponentProps {
+  userId: number;
+}
 
 
-const PricingPage =()=>{
-    return (
+const PricingPage: React.FC<YourComponentProps> = ({ userId }) => {
+  return (
         <div>
+           <div>
+      User ID: {userId}
+    </div>
         <div className="text-center mb-16">
           <h1 className="font-extrabold text-3xl">Plan and Pricing</h1>
           <p className="text-gray-500">
@@ -58,7 +64,8 @@ const PricingPage =()=>{
 }
 </div>
         </div>
+        
     )
 }
 
-export default PricingPage
+export default PricingPage;

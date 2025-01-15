@@ -16,11 +16,11 @@ export const getFormStats = async () => {
             ownerId: user.id as string
         },
         _sum: {
-            submission: true
+            submissions: true
         }
     });
 
-    const submissions = stats._sum.submission || 0;
+    const submissions = stats._sum.submissions || 0;
 
     return submissions;
 }

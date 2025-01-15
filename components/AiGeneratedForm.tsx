@@ -1,13 +1,13 @@
 "use client";
 import React, { useState } from "react";
-import { Label } from "./ui/label";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { publishForm } from "@/actions/publishForm";
 import FormPublishDialog from "./FormPublishDialog";
 import { Fields } from "@/types/form";
 import toast from "react-hot-toast";
-import { submitForm } from "@/actions/submitForm";
+import { submitForm } from "../actions/submitForm";
 
 type Props = { form: any; isEditMode: boolean };
 

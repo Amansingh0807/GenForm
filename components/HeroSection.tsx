@@ -1,52 +1,68 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
 import GenerateFormInput from "./GenerateFormInput";
 import { Button } from "./ui/button";
 
-type suggentionBox = {
+type SuggestionText = {
   label: string;
   text: string;
 };
 
-const SuggestionBtnText: suggentionBox[] = [
+const suggestionBtnText: SuggestionText[] = [
   {
     label: "Job Application",
-    text: "Develop a basic job application form using GenForm AI and also write the prompt using that",
+    text: "Develop a basic job application form that serves as a one-page solution form collecting essential information from applicants.",
   },
   {
-    label: "School Details",
-    text: "Develop a basic job application form using GenForm AI and also write the prompt using that",
+    label: "Registration Form",
+    text: "Create a course registration form suitable form any scheool or instituition.",
   },
   {
-    label: "FeedBack",
-    text: "Develop a basic job application form using GenForm AI and also write the prompt using that",
-  },
-  {
-    label: "Nominations",
-    text: "Develop a basic job application form using GenForm AI and also write the prompt using that",
+    label: "Feedback Form",
+    text: "Create a client feedback form to gather valuable insights from any clients.",
   },
 ];
 
-const HeroSection = () => {
+type Props = {
+  totalForms:number;
+  isSubscribed:boolean
+}
+
+type GenerateFormInput = {
+
+  text: string;
+
+  totalForms: number;
+
+  isSubscribed: boolean;
+
+};
+
+
+const HeroSection :React.FC<Props> = ({totalForms, isSubscribed}) => {
+  const [text, setText] = useState<string>("");
+
   return (
     <section>
       <div className="relative">
+        {/* Glow effect  */}
         <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 blur-2xl opacity-50 -z-10"></div>
-        <div className=" conatiner mx-auto text-center relative ">
-          <h1 className="text-4xl font-bold">Efficient forms Via AI</h1>
-          <p className="mt-4 text-lg">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit.
+
+        <div className="container mx-auto text-center relative">
+          <h1 className="text-4xl font-bold">
+            Build AI-Driven Forms Effortlessly
+          </h1>
+          <p className="mt-4 text-lg ">
+            Leverage the power of AI to create responsive and dynamic froms in
+            minutes
           </p>
         </div>
       </div>
-
-      <GenerateFormInput />
+      {/* create input field  */}
+      <GenerateFormInput text={text} totalForms={totalForms} isSubscribed={isSubscribed}/>
       <div className="grid grid-cols-4 gap-3">
-        {SuggestionBtnText.map((item: suggentionBox, index: number) => (
-          <Button
-            className="rounded-full h-10 "
-            variant={"outline"}
-            key={index}
-          >
+        {suggestionBtnText.map((item: SuggestionText, index: number) => (
+          <Button onClick={()=> setText(item.text)} key={index} className="rounded-full h-10" variant={"outline"}>
             {item.label}
           </Button>
         ))}
@@ -54,4 +70,5 @@ const HeroSection = () => {
     </section>
   );
 };
+
 export default HeroSection;

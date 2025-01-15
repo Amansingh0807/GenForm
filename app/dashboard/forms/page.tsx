@@ -34,7 +34,7 @@ const MyForm = async () => {
                 Write a clean prompt to get better results.
               </DialogDescription>
             </DialogHeader>
-            <GenerateFormInput />
+            <GenerateFormInput text="Your prompt here" totalForms={forms?.data?.length || 0} isSubscribed={true} />
           </DialogContent>
         </Dialog>
       </section>

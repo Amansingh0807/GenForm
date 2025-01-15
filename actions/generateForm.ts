@@ -1,38 +1,45 @@
-"use server"
-import prisma from "@/lib/prisma"
-import { currentUser } from "@clerk/nextjs/server"
-import { z } from "zod"
+"use server";
+
+import prisma from "@/lib/prisma";
+import { currentUser } from "@clerk/nextjs/server";
+import { z } from "zod";
 import { revalidatePath } from "next/cache";
-const { GoogleGenerativeAI } = require("@google/generative-ai");
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API!);
+const GEMINI_API_KEY = process.env.GEMINI_API_KEY; // Ensure the Gemini API key is set in your environment variables
+const GEMINI_API_URL = "https://api.gemini.ai/v1/endpoint"; // Replace with the correct Gemini API endpoint
 
-export const generateForm = async (prevState:unknown, formData:FormData)=>{
-    try{
-        const user =await currentUser();
-        if(!user){
-            return {success:false,message:"User not found"}
-        }
-        const schema = z.object({
-            description:z.string().min(1, "Description is required")
-        });
-        const result = schema.safeParse({
-            description:formData.get("description") as string    
-          })
-          if (!result.success){
-           return {success:false, message:"Invalid from data", error:result.error.errors} 
-          }
-          
-          const description = result.data.description;
+export const generateForm = async (prevState: unknown, formData: FormData) => {
+  try {
+    const user = await currentUser();
+    if (!user) {
+      return { success: false, message: "User not found" };
+    }
 
-          if (!process.env.OPENAI_API_KEY) {
-            return { success: false, message: "OPENAI api key not found" }
-        }
+    // Define schema for validation
+    const schema = z.object({
+      description: z.string().min(1, "Description is required"),
+    });
 
-        const prompt = `Generate a JSON response for a form with the following structure. Ensure the keys and format remain constant in every response.
+    const result = schema.safeParse({
+      description: formData.get("description") as string,
+    });
 
+    if (!result.success) {
+      return {
+        success: false,
+        message: "Invalid form data",
+        error: result.error.errors,
+      };
+    }
 
-        {
+    const description = result.data.description;
+
+    if (!GEMINI_API_KEY) {
+      return { success: false, message: "Gemini API key not found" };
+    }
+
+    const prompt = `Generate a JSON response for a form with the following structure. Ensure the keys and format remain constant in every response.
+{
   "formTitle": "string", // The title of the form
   "formFields": [        // An array of fields in the form
     {
@@ -47,53 +54,55 @@ Requirements:
 - Always include at least 3 fields in the "formFields" array.
 - Keep the field names consistent across every generation for reliable rendering.
 - Provide meaningful placeholder text for each field based on its label.
-        `;
+`;
 
-        // Request openai to genrate the form content
+    // Make a request to the Gemini API
+    const response = await fetch(GEMINI_API_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${GEMINI_API_KEY}`,
+      },
+      body: JSON.stringify({
+        prompt: `${description} ${prompt}`,
+        model: "gemini-latest", // Use the appropriate Gemini model
+      }),
+    });
 
-        const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
+    if (!response.ok) {
+      console.error("Gemini API error:", await response.text());
+      return { success: false, message: "Failed to generate form content" };
+    }
 
-        const aiResult = await model.generateContent(prompt);
-        console.log(aiResult.response.text());
+    const responseData = await response.json();
+    const formContent = responseData?.data?.content; // Adjust based on Gemini API's response structure
 
-        const formContent = aiResult.choices[0]?.message.content;
-        if (!formContent) {
-            return { success: false, message: "Failed to generate form content" }
-        }
+    if (!formContent) {
+      return { success: false, message: "No form content generated" };
+    }
 
-        console.log("generated form -> ",formContent);
-        
+    console.log("Generated form ->", formContent);
 
-        // let formJsonData;
-        // // try {
-        // //     formJsonData = JSON.parse(formContent);
-        // // } catch (error) {
-        // //     console.log("Error parsing JSON", error);
-        // //     return { success: false, message: "Generated form content is not valid JSON" };
-        // // }
+    // Save the generated form to the database
+    const form = await prisma.form.create({
+      data: {
+        ownerId: user.id,
+        content: formContent,
+      },
+    });
 
-        // console.log(formJsonData);
-        
-        // save the generated form to the databse
-        const form = await prisma.form.create({
-            data: {
-                ownerId: user.id,
-                content: formContent
-            }
-        });
+    revalidatePath("/dashboard/forms"); // Optionally revalidate a path if necessary
 
-        revalidatePath("/dashboard/forms"); // Optionally revalidate a path if necessary
-        
-        return {
-            success: true,
-            message: "Form generated successfully.",
-            data: form
-        }
-
-    }catch(cerror){
-        console.log("Error generated form", cerror);
-        return { success: false, message: "An error occurred while generateing the form" }
-
-
-    }    
-}
+    return {
+      success: true,
+      message: "Form generated successfully.",
+      data: form,
+    };
+  } catch (error) {
+    console.error("Error generating form:", error);
+    return {
+      success: false,
+      message: "An error occurred while generating the form",
+    };
+  }
+};
