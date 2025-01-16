@@ -46,15 +46,14 @@ const HeroSection :React.FC<Props> = ({totalForms, isSubscribed}) => {
     <section>
       <div className="relative">
         {/* Glow effect  */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-purple-600 blur-2xl opacity-50 -z-10"></div>
+        <div className="absolute inset-0 bg-gradient-to-r from-blue-500 to-green-600 blur-2xl opacity-50 -z-10"></div>
 
         <div className="container mx-auto text-center relative">
           <h1 className="text-4xl font-bold">
-            Build AI-Driven Forms Effortlessly
+          Effortlessly Create AI-Powered Forms
           </h1>
           <p className="mt-4 text-lg ">
-            Leverage the power of AI to create responsive and dynamic froms in
-            minutes
+          Harness AI technology to build dynamic, responsive forms in just minutes.
           </p>
         </div>
       </div>
