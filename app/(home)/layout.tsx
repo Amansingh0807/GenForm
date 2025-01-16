@@ -1,19 +1,24 @@
-import React from "react";
-import Logo from "@/components/Logo";
-import { UserButton } from "@clerk/nextjs";
 import { DarkMode } from "@/components/DarkMode";
+import Logo from "@/components/Logo";
+import { Button } from "@/components/ui/button";
+import { UserButton } from "@clerk/nextjs";
+import Link from "next/link";
+import React from "react";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <div>
       <div className="border-b">
-        <nav className="flex items-center justify-between max-w-7xl mx-auto py-2 px-10">
+        {/* Navbar  */}
+        <nav className="flex items-center justify-between max-w-7xl mx-auto py-2">
           <Logo />
-          <div className="flex items-center space-x-4">
-            {/* Adding space between items */}
-            <button>Dashboard</button>
-            <UserButton />
-            <DarkMode/>
+          <div className="flex items-center gap-2">
+            <Link href={"/dashboard/analytics"}>
+              {" "}
+              <Button variant={"link"}>Dashboard</Button>
+            </Link>
+            <UserButton afterSignOutUrl="/sign-in" />
+            <DarkMode /> 
           </div>
         </nav>
       </div>
@@ -22,5 +27,4 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-export default Layout;
-
+export default layout;

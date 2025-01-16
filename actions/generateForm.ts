@@ -4,9 +4,9 @@ import prisma from "@/lib/prisma";
 import { currentUser } from "@clerk/nextjs/server";
 import { z } from "zod";
 import { revalidatePath } from "next/cache";
+import { GoogleGenerativeAI } from "@google/generative-ai"; // Import Gemini SDK
 
 const GEMINI_API_KEY = process.env.GEMINI_API_KEY; // Ensure the Gemini API key is set in your environment variables
-const GEMINI_API_URL = "https://api.gemini.ai/v1/endpoint"; // Replace with the correct Gemini API endpoint
 
 export const generateForm = async (prevState: unknown, formData: FormData) => {
   try {
@@ -20,23 +20,40 @@ export const generateForm = async (prevState: unknown, formData: FormData) => {
       description: z.string().min(1, "Description is required"),
     });
 
-    const result = schema.safeParse({
+    const validationResult = schema.safeParse({
       description: formData.get("description") as string,
     });
 
-    if (!result.success) {
+    if (!validationResult.success) {
       return {
         success: false,
         message: "Invalid form data",
-        error: result.error.errors,
+        error: validationResult.error.errors,
       };
     }
 
-    const description = result.data.description;
+    const description = validationResult.data.description;
 
     if (!GEMINI_API_KEY) {
       return { success: false, message: "Gemini API key not found" };
     }
+
+    const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
+
+    const model = genAI.getGenerativeModel({
+      model: "gemini-2.0-flash-exp", // Use the correct Gemini model
+    });
+
+    const generationConfig = {
+      temperature: 1,
+      topP: 0.95,
+      topK: 40,
+      maxOutputTokens: 8192,
+      responseMimeType: "application/json",
+    };
+
+    // Start a chat session and send the prompt
+    const chatSession = model.startChat({ generationConfig, history: [] });
 
     const prompt = `Generate a JSON response for a form with the following structure. Ensure the keys and format remain constant in every response.
 {
@@ -53,29 +70,10 @@ Requirements:
 - Use only the given keys: "formTitle", "formFields", "label", "name", "placeholder".
 - Always include at least 3 fields in the "formFields" array.
 - Keep the field names consistent across every generation for reliable rendering.
-- Provide meaningful placeholder text for each field based on its label.
-`;
+- Provide meaningful placeholder text for each field based on its label.`;
 
-    // Make a request to the Gemini API
-    const response = await fetch(GEMINI_API_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${GEMINI_API_KEY}`,
-      },
-      body: JSON.stringify({
-        prompt: `${description} ${prompt}`,
-        model: "gemini-latest", // Use the appropriate Gemini model
-      }),
-    });
-
-    if (!response.ok) {
-      console.error("Gemini API error:", await response.text());
-      return { success: false, message: "Failed to generate form content" };
-    }
-
-    const responseData = await response.json();
-    const formContent = responseData?.data?.content; // Adjust based on Gemini API's response structure
+    const result = await chatSession.sendMessage(`${description} ${prompt}`);
+    const formContent = result.response.text(); // Parse response content
 
     if (!formContent) {
       return { success: false, message: "No form content generated" };

@@ -1,15 +1,17 @@
 "use server";
 
 import prisma from "@/lib/prisma";
+import { string } from "zod";
 
 export const createSubscription = async ({ userId }: { userId: string }) => {
-  if (!userId || isNaN(parseInt(userId, 10))) {
+  if (!userId) {
     throw new Error("Invalid or missing user ID");
   }
 
   const subscription = await prisma.subscription.create({
     data: {
-      userId: parseInt(userId, 10), // Convert string to integer
+      userId, // Use userId as a string
+      plan: "basic", // Add a default plan
       subscribed: true,
       createdAt: new Date(),
       updatedAt: new Date(),
@@ -21,14 +23,14 @@ export const createSubscription = async ({ userId }: { userId: string }) => {
 
 export const getUserSubscription = async (userId: string) => {
   // Validate the userId before proceeding
-  if (!userId || isNaN(parseInt(userId, 10))) {
+  if (!userId) {
     throw new Error("Invalid or missing user ID");
   }
 
   // Fetch the subscription for the given user ID
   const subscription = await prisma.subscription.findFirst({
     where: {
-      userId: parseInt(userId, 10), // Convert string to integer
+      userId, // Use userId as a string
     },
   });
 

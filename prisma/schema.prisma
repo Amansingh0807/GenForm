@@ -27,16 +27,12 @@ model Submissions {
   content   Json
 }
 
+
 model Subscription {
-
-  id         Int      @id @default(autoincrement())
-
-  userId     Int
-
-  subscribed Boolean  @default(false)
-
-  createdAt  DateTime @default(now())
-
-  updatedAt  DateTime @updatedAt
-
+  id        Int      @id @default(autoincrement())
+  userId    String   // Change from Int to String
+  plan      String
+  subscribed Boolean @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
