@@ -33,7 +33,7 @@ const Footer = () => {
             width={30}
             height={30}
           />
-          Let's Connect
+          Let&apos;s Connect
         </a>
         <a
           className="flex items-center gap-2 hover:underline hover:underline-offset-4"
