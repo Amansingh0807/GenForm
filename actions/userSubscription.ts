@@ -1,39 +1,55 @@
 "use server";
 
 import prisma from "@/lib/prisma";
-import { string } from "zod";
 
 export const createSubscription = async ({ userId }: { userId: string }) => {
   if (!userId) {
     throw new Error("Invalid or missing user ID");
   }
 
-  const subscription = await prisma.subscription.create({
-    data: {
-      userId, // Use userId as a string
-      plan: "basic", // Add a default plan
-      subscribed: true,
-      createdAt: new Date(),
-      updatedAt: new Date(),
-    },
-  });
+  try {
+    // Create a new subscription for the user
+    const subscription = await prisma.subscription.create({
+      data: {
+        userId, // Use userId as a string
+        plan: "basic", // Default plan
+        subscribed: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    });
 
-  return subscription;
+    return subscription;
+  } catch (error) {
+    // Log the error and throw it
+    console.error("Error creating subscription:", error);
+    throw new Error("Failed to create subscription");
+  }
 };
 
 export const getUserSubscription = async (userId: string) => {
-  // Validate the userId before proceeding
   if (!userId) {
     throw new Error("Invalid or missing user ID");
   }
 
-  // Fetch the subscription for the given user ID
-  const subscription = await prisma.subscription.findFirst({
-    where: {
-      userId, // Use userId as a string
-    },
-  });
+  try {
+    // Fetch the user's subscription details
+    const subscription = await prisma.subscription.findFirst({
+      where: {
+        userId, // Use userId as a string
+      },
+    });
 
-  // Check if the user is subscribed
-  return subscription?.subscribed ? true : false;
+    // If no subscription is found or the user is not subscribed, return false
+    if (!subscription || !subscription.subscribed) {
+      return { isSubscribed: false, subscription };
+    }
+
+    // Return subscription details if the user is subscribed
+    return { isSubscribed: true, subscription };
+  } catch (error) {
+    // Log the error and throw it
+    console.error("Error fetching user subscription:", error);
+    throw new Error("Failed to fetch user subscription");
+  }
 };
