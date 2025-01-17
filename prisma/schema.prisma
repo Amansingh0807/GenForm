@@ -14,8 +14,8 @@ model Form {
   createdAt       DateTime      @default(now())
   published       Boolean       @default(false)
   content         Json
-  submissions     Int           @default(0)
   shareUrl        String        @default(uuid())
+  submissions     Int           @default(0)
   FormSubmissions Submissions[]
 }
 
@@ -23,16 +23,24 @@ model Submissions {
   id        Int      @id @default(autoincrement())
   createdAt DateTime @default(now())
   formId    Int
-  form      Form     @relation(fields: [formId], references: [id])
   content   Json
+  form      Form     @relation(fields: [formId], references: [id])
 }
 
-
 model Subscription {
-  id        Int      @id @default(autoincrement())
-  userId    String   // Change from Int to String
-  plan      String
-  subscribed Boolean @default(false)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id         Int      @id @default(autoincrement())
+  userId     String
+  plan       String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  subscribed Boolean  @default(false)
+}
+
+/// This model contains row level security and requires additional setup for migrations. Visit https://pris.ly/d/row-level-security for more info.
+model users {
+  id        String    @id
+  email     String
+  firstname String?
+  lastname  String?
+  createdat DateTime? @default(now()) @db.Timestamp(6)
 }
