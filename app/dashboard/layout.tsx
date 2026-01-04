@@ -1,14 +1,21 @@
-import DashboardSidebar from "@/components/Sidebar"; 
-import { SidebarProvider } from "@/components/ui/sidebar";
-import React from "react";
+import DashboardSidebar from "@/components/Sidebar";
+import {
+  SidebarProvider,
+  SidebarInset,
+} from "@/components/ui/sidebar";
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+export default function Layout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
     <SidebarProvider>
+      {/* Sidebar */}
       <DashboardSidebar />
-      <main className="mx-6 my-4 w-full">{children}</main>
+      <SidebarInset className="px-6 py-4 pl-20">
+        {children}
+      </SidebarInset>
     </SidebarProvider>
   );
-};
-
-export default layout;
+}
