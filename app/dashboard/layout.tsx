@@ -13,7 +13,7 @@ export default function Layout({
     <SidebarProvider>
       {/* Sidebar */}
       <DashboardSidebar />
-      <SidebarInset className="px-6 py-4 pl-20">
+      <SidebarInset className="px-6 py-4 pl-8">
         {children}
       </SidebarInset>
     </SidebarProvider>
