@@ -1,7 +1,7 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import { Button } from "./ui/button";
-import { ArrowRight, CheckCircle, Sparkles, Zap, Shield, Users, BarChart3, Clock, Star, FileText, Share2, Edit } from "lucide-react";
+import { ArrowRight, CheckCircle, Sparkles, Zap, Shield, Users, BarChart3, Clock, Star, FileText, Share2, Edit, HelpCircle } from "lucide-react";
 import Link from "next/link";
 import PricingPage from "./PricingPage";
 import Footer from "./Footer";
@@ -11,6 +11,11 @@ interface LandingPageProps {
 }
 
 const LandingPage = ({ userId }: LandingPageProps) => {
+  // Track which FAQ item is open. Using React state lets us control
+  // animations and click targets precisely (we replaced native
+  // <details>/<summary> so the whole header is clickable).
+  const [openFaq, setOpenFaq] = useState<"forms" | "customize" | "submissions" | null>(null);
+
   return (
     <div className="min-h-screen">
       {/* Hero Section with Background Pattern */}
@@ -103,7 +108,7 @@ const LandingPage = ({ userId }: LandingPageProps) => {
             {/* Feature 1 */}
             <div
               className="p-8 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-gray-700/40
- hover:shadow-md hover:shadow-gray-300/50 transition-all duration-300"
+ hover:shadow-md hover:shadow-gray-300/50 hover:-translate-y-1 transition-all duration-300"
             >
               <div className="w-14 h-14 bg-green-500 rounded-xl flex items-center justify-center mb-4">
                 <Zap className="w-7 h-7 text-white" />
@@ -120,7 +125,7 @@ const LandingPage = ({ userId }: LandingPageProps) => {
             {/* Feature 2 */}
             <div
               className="p-8 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-gray-700/40
- hover:shadow-md hover:shadow-gray-300/50 transition-all duration-300"
+ hover:shadow-md hover:shadow-gray-300/50 hover:-translate-y-1 transition-all duration-300"
             >
               <div className="w-14 h-14 bg-indigo-600 rounded-xl flex items-center justify-center mb-4">
                 <Shield className="w-7 h-7 text-white" />
@@ -137,7 +142,7 @@ const LandingPage = ({ userId }: LandingPageProps) => {
             {/* Feature 3 */}
             <div
               className="p-8 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-gray-700/40
- hover:shadow-md hover:shadow-gray-300/50  transition-all duration-300"
+ hover:shadow-md hover:shadow-gray-300/50 hover:-translate-y-1  transition-all duration-300"
             >
               <div className="w-14 h-14 bg-teal-500 rounded-xl flex items-center justify-center mb-4">
                 <Users className="w-7 h-7 text-white" />
@@ -154,7 +159,7 @@ const LandingPage = ({ userId }: LandingPageProps) => {
             {/* Feature 4 */}
             <div
               className="p-6 sm:p-8 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-gray-700/40
- hover:shadow-md hover:shadow-gray-300/50 transition-all duration-300"
+ hover:shadow-md hover:shadow-gray-300/50 hover:-translate-y-1 transition-all duration-300"
             >
               <div className="w-14 h-14 bg-green-500 rounded-xl flex items-center justify-center mb-4">
                 <Edit className="w-7 h-7 text-white" />
@@ -171,7 +176,7 @@ const LandingPage = ({ userId }: LandingPageProps) => {
             {/* Feature 5 */}
             <div
               className="p-8 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-gray-700/40
- hover:shadow-md hover:shadow-gray-300/50 transition-all duration-300"
+ hover:shadow-md hover:shadow-gray-300/50 hover:-translate-y-1 transition-all duration-300"
             >
               <div className="w-14 h-14 bg-indigo-600 rounded-xl flex items-center justify-center mb-4">
                 <BarChart3 className="w-7 h-7 text-white" />
@@ -188,7 +193,7 @@ const LandingPage = ({ userId }: LandingPageProps) => {
             {/* Feature 6 */}
             <div
               className="p-8 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-gray-700/40
- hover:shadow-md hover:shadow-gray-300/50 transition-all duration-300"
+ hover:shadow-md hover:shadow-gray-300/50 hover:-translate-y-1 transition-all duration-300"
             >
               <div className="w-14 h-14 bg-teal-500 rounded-xl flex items-center justify-center mb-4">
                 <Clock className="w-7 h-7 text-white" />
@@ -215,9 +220,16 @@ const LandingPage = ({ userId }: LandingPageProps) => {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 text-center">
               {/* Step 1 */}
-              <div className="flex flex-col items-center px-4">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-green-50 dark:bg-green-900/20 rounded-full flex items-center justify-center mb-4">
-                  <FileText className="w-8 h-8 sm:w-10 sm:h-10 text-green-500 dark:text-green-400" />
+              <div className="flex flex-col items-center px-4 group">
+              <div className="relative mb-6">
+              <div className="absolute inset-0 bg-green-400 rounded-full blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
+              <div className="absolute inset-2 bg-green-500/30 border border-green-600 rounded-full blur-xl opacity-50  transition duration-300 group-hover:opacity-80" />
+              <div className="relative w-16 h-16 sm:w-20 sm:h-20 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center shadow-sm border border-green-500/70 dark:border-green-900/30 transition-transform duration-300 group-hover:scale-110 ">
+                    <FileText 
+                      className="relative z-10 w-8 h-8 sm:w-10 sm:h-10 text-green-600 dark:text-green-400" 
+                      strokeWidth={2}
+                    />
+                  </div>
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2">
                   1. Describe
@@ -228,9 +240,16 @@ const LandingPage = ({ userId }: LandingPageProps) => {
                 </p>
               </div>
               {/* Step 2 */}
-              <div className="flex flex-col items-center px-4">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-emerald-50 dark:bg-emerald-900/20 rounded-full flex items-center justify-center mb-4">
-                  <Sparkles className="w-8 h-8 sm:w-10 sm:h-10 text-emerald-500 dark:text-emerald-400" />
+              <div className="flex flex-col items-center px-4 group">
+                <div className="relative mb-6">
+                <div className="absolute inset-0 bg-green-400 rounded-full blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
+                <div className="absolute inset-2 bg-green-500/30 border border-green-600 rounded-full blur-xl opacity-50  transition duration-300 group-hover:opacity-80" />
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center shadow-sm border border-green-500/70 dark:border-green-900/30 transition-transform duration-300 group-hover:scale-110 ">
+                      <Sparkles 
+                      className="relative z-10 w-8 h-8 sm:w-10 sm:h-10 text-green-600 dark:text-green-400" 
+                      strokeWidth={2}
+                    />
+                  </div>
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2">
                   2. Generate
@@ -241,9 +260,16 @@ const LandingPage = ({ userId }: LandingPageProps) => {
                 </p>
               </div>
               {/* Step 3 */}
-              <div className="flex flex-col items-center px-4">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 bg-teal-50 dark:bg-teal-900/20 rounded-full flex items-center justify-center mb-4">
-                  <Share2 className="w-8 h-8 sm:w-10 sm:h-10 text-teal-500 dark:text-teal-400" />
+              <div className="flex flex-col items-center px-4 group">
+                <div className="relative mb-6">
+                <div className="absolute inset-0 bg-green-400 rounded-full blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
+                <div className="absolute inset-2 bg-green-500/30 border border-green-600 rounded-full blur-xl opacity-50  transition duration-300 group-hover:opacity-80" />
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center shadow-sm border border-green-500/70 dark:border-green-900/30 transition-transform duration-300 group-hover:scale-110 ">
+                      <Share2 
+                      className="relative z-10 w-8 h-8 sm:w-10 sm:h-10 text-green-600 dark:text-green-400" 
+                      strokeWidth={2}
+                    />
+                  </div>
                 </div>
                 <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2">
                   3. Share
@@ -257,7 +283,7 @@ const LandingPage = ({ userId }: LandingPageProps) => {
           </div>
 
           {/* Stats Section */}
-          <div className="bg-green-500 rounded-2xl sm:rounded-3xl p-6 sm:p-10 md:p-12 mb-12 sm:mb-16 md:mb-20">
+          <div className="relative group bg-green-500 animate-breathe rounded-2xl sm:rounded-3xl p-6 sm:p-10 md:p-12 mb-12 sm:mb-16 md:mb-20 shadow-2xl shadow-green-500/20 transition-all shadow-xl duration-500 hover:scale-[1.02] border border-white/10 hover:border-white ">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center text-white">
               <div>
                 <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 sm:mb-2">
@@ -306,7 +332,7 @@ const LandingPage = ({ userId }: LandingPageProps) => {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
-              <div className="p-8 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-gray-700/20">
+              <div className="p-8 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200  hover:shadow-md hover:shadow-gray-300/50 hover:-translate-y-1 transition-all duration-300 dark:border-gray-700/20">
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <Star
@@ -335,7 +361,7 @@ const LandingPage = ({ userId }: LandingPageProps) => {
                 </div>
               </div>
 
-              <div className="p-6 sm:p-8 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-gray-700/20">
+              <div className="p-6 sm:p-8 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200 hover:shadow-md hover:shadow-gray-300/50 hover:-translate-y-1 transition-all duration-300 dark:border-gray-700/20">
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <Star
@@ -363,7 +389,7 @@ const LandingPage = ({ userId }: LandingPageProps) => {
                 </div>
               </div>
 
-              <div className="p-6 sm:p-8 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-gray-700/20">
+              <div className="p-6 sm:p-8 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200 hover:shadow-md hover:shadow-gray-300/50 hover:-translate-y-1 transition-all duration-300 dark:border-gray-700/20">
                 <div className="flex gap-1 mb-4">
                   {[...Array(5)].map((_, i) => (
                     <Star
@@ -402,10 +428,29 @@ const LandingPage = ({ userId }: LandingPageProps) => {
             </h2>
           </div>
           <div className="space-y-4">
-            <details className="group p-4 sm:p-6 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-gray-700/40 cursor-pointer">
-              <summary className="flex items-center justify-between font-semibold text-sm sm:text-base text-gray-900 dark:text-white">
-                How many forms can I create?
-                <span className="transform transition-transform duration-300 group-open:rotate-180">
+            {/* FAQ 1
+              Replaced native <details> with a state-driven panel so the
+              whole header (question row) is clickable and animations are
+              consistent across browsers. */}
+            <div
+              className={`group rounded-2xl border border-gray-200/70 dark:border-gray-700/50 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm cursor-pointer transition-all duration-500 ease-[cubic-bezier(.2,.8,.2,1)] hover:bg-white/80 dark:hover:bg-gray-900/30 hover:shadow-md hover:shadow-gray-300/40 dark:hover:shadow-none focus-within:ring-2 focus-within:ring-green-500/20 focus-within:border-green-200 ${
+                openFaq === "forms" ? "shadow-xl shadow-gray-300/40 border-green-200" : ""
+              }`}
+            >
+              <button
+                type="button"
+                onClick={() =>
+                  setOpenFaq((prev) => (prev === "forms" ? null : "forms"))
+                }
+                className="flex w-full items-start sm:items-center gap-3 p-4 sm:p-6 font-semibold text-sm sm:text-base text-gray-900 dark:text-white text-left focus-visible:outline-none"
+              >
+                <HelpCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-1 sm:mt-0" />
+                <span className="flex-1">How many forms can I create?</span>
+                <span
+                  className={`ml-3 transform transition-transform duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
+                    openFaq === "forms" ? "rotate-180" : ""
+                  }`}
+                >
                   <svg
                     width="20"
                     height="20"
@@ -419,17 +464,52 @@ const LandingPage = ({ userId }: LandingPageProps) => {
                     <path d="M6 9l6 6 6-6" />
                   </svg>
                 </span>
-              </summary>
-              <p className="mt-3 sm:mt-4 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
-                With our free plan, you can create up to 3 forms with AI. If you
-                need more, our Pro plan offers unlimited AI-powered form
-                creation. You can create unlimited manual forms on any plan.
-              </p>
-            </details>
-            <details className="group p-4 sm:p-6 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-gray-700/40 cursor-pointer">
-              <summary className="flex items-center justify-between font-semibold text-sm sm:text-base text-gray-900 dark:text-white">
-                Can I customize the forms?
-                <span className="transform transition-transform duration-300 group-open:rotate-180">
+              </button>
+              <div className="px-4 pb-4 sm:px-6 sm:pb-6">
+                {/* Content expansion uses a grid-rows transition to mimic
+                    auto-height; text also fades/slides for a smooth feel */}
+                <div
+                  className={`grid transition-[grid-template-rows] duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
+                    openFaq === "forms" ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <p
+                      className={`text-xs sm:text-sm text-gray-600 dark:text-gray-300 transition-all duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
+                        openFaq === "forms"
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-1"
+                      }`}
+                    >
+                      With our free plan, you can create up to 3 forms with AI. If you
+                      need more, our Pro plan offers unlimited AI-powered form
+                      creation. You can create unlimited manual forms on any plan.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* FAQ 2 */}
+            <div
+              className={`group rounded-2xl border border-gray-200/70 dark:border-gray-700/50 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm cursor-pointer transition-all duration-500 ease-[cubic-bezier(.2,.8,.2,1)] hover:bg-white/80 dark:hover:bg-gray-900/30 hover:shadow-md hover:shadow-gray-300/40 dark:hover:shadow-none focus-within:ring-2 focus-within:ring-green-500/20 focus-within:border-green-200 ${
+                openFaq === "customize" ? "shadow-xl shadow-gray-300/40 border-green-200" : ""
+              }`}
+            >
+              <button
+                type="button"
+                onClick={() =>
+                  setOpenFaq((prev) => (prev === "customize" ? null : "customize"))
+                }
+                className="flex w-full items-start sm:items-center gap-3 p-4 sm:p-6 font-semibold text-sm sm:text-base text-gray-900 dark:text-white text-left focus-visible:outline-none"
+              >
+                <HelpCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-1 sm:mt-0" />
+                <span className="flex-1">Can I customize the forms?</span>
+                <span
+                  className={`ml-3 transform transition-transform duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
+                    openFaq === "customize" ? "rotate-180" : ""
+                  }`}
+                >
                   <svg
                     width="20"
                     height="20"
@@ -443,17 +523,54 @@ const LandingPage = ({ userId }: LandingPageProps) => {
                     <path d="M6 9l6 6 6-6" />
                   </svg>
                 </span>
-              </summary>
-              <p className="mt-3 sm:mt-4 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
-                Absolutely! After the AI generates your form, you have full
-                control to edit, add, remove, and reorder fields. You can also
-                customize the title and description.
-              </p>
-            </details>
-            <details className="group p-4 sm:p-6 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-gray-700/40 cursor-pointer">
-              <summary className="flex items-center justify-between font-semibold text-sm sm:text-base text-gray-900 dark:text-white">
-                How do I see the submissions?
-                <span className="transform transition-transform duration-300 group-open:rotate-180">
+              </button>
+              <div className="px-4 pb-4 sm:px-6 sm:pb-6">
+                {/* Content expansion uses a grid-rows transition to mimic
+                    auto-height; text also fades/slides for a smooth feel */}
+                <div
+                  className={`grid transition-[grid-template-rows] duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
+                    openFaq === "customize" ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <p
+                      className={`text-xs sm:text-sm text-gray-600 dark:text-gray-300 transition-all duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
+                        openFaq === "customize"
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-1"
+                      }`}
+                    >
+                      Absolutely! After the AI generates your form, you have full
+                      control to edit, add, remove, and reorder fields. You can also
+                      customize the title and description.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* FAQ 3 */}
+            <div
+              className={`group rounded-2xl border border-gray-200/70 dark:border-gray-700/50 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm cursor-pointer transition-all duration-500 ease-[cubic-bezier(.2,.8,.2,1)] hover:bg-white/80 dark:hover:bg-gray-900/30 hover:shadow-md hover:shadow-gray-300/40 dark:hover:shadow-none focus-within:ring-2 focus-within:ring-green-500/20 focus-within:border-green-200 ${
+                openFaq === "submissions" ? "shadow-xl shadow-gray-300/40 border-green-200" : ""
+              }`}
+            >
+              <button
+                type="button"
+                onClick={() =>
+                  setOpenFaq((prev) =>
+                    prev === "submissions" ? null : "submissions"
+                  )
+                }
+                className="flex w-full items-start sm:items-center gap-3 p-4 sm:p-6 font-semibold text-sm sm:text-base text-gray-900 dark:text-white text-left focus-visible:outline-none"
+              >
+                <HelpCircle className="w-5 h-5 text-teal-500 flex-shrink-0 mt-1 sm:mt-0" />
+                <span className="flex-1">How do I see the submissions?</span>
+                <span
+                  className={`ml-3 transform transition-transform duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
+                    openFaq === "submissions" ? "rotate-180" : ""
+                  }`}
+                >
                   <svg
                     width="20"
                     height="20"
@@ -467,13 +584,31 @@ const LandingPage = ({ userId }: LandingPageProps) => {
                     <path d="M6 9l6 6 6-6" />
                   </svg>
                 </span>
-              </summary>
-              <p className="mt-3 sm:mt-4 text-xs sm:text-sm text-gray-600 dark:text-gray-300">
-                All submissions for your forms are available in your dashboard.
-                You can view individual submissions and see an overview in the
-                analytics section.
-              </p>
-            </details>
+              </button>
+              <div className="px-4 pb-4 sm:px-6 sm:pb-6">
+                {/* Content expansion uses a grid-rows transition to mimic
+                    auto-height; text also fades/slides for a smooth feel */}
+                <div
+                  className={`grid transition-[grid-template-rows] duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
+                    openFaq === "submissions" ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <p
+                      className={`text-xs sm:text-sm text-gray-600 dark:text-gray-300 transition-all duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
+                        openFaq === "submissions"
+                          ? "opacity-100 translate-y-0"
+                          : "opacity-0 translate-y-1"
+                      }`}
+                    >
+                      All submissions for your forms are available in your dashboard.
+                      You can view individual submissions and see an overview in the
+                      analytics section.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 

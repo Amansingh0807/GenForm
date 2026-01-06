@@ -14,6 +14,29 @@
 </div>
 
 ---
+## 🤝 Contributors
+
+We ❤️ our contributors!  
+GenForm proudly participates in **SWOC**, and we appreciate everyone who contributes to this project.
+
+### 🌟 SWOC Contributors 2026
+
+<!-- Add your name below once your PR is merged -->
+
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/Amansingh0807"><img src="https://github.com/Amansingh0807.png" width="100px;" alt=""/><br /><sub><b>Aman Singh</b></sub></a></td>
+    <td align="center"><a href="https://github.com/KennethJF23"><img src="https://github.com/KennethJF23.png" width="100px;" alt=""/><br /><sub><b>Kenneth Jerome Fernandes</b></sub></a></td>
+    <td align="center"><a href="https://github.com/shihabhasan0161"><img src="https://github.com/shihabhasan0161.png" width="100px;" alt=""/><br /><sub><b>Shihab Hasan</b></sub></a></td>
+    <td align="center"><a href="https://github.com/prabuddhaxdev"><img src="https://github.com/prabuddhaxdev.png" width="100px;" alt=""/><br /><sub><b>Prabuddha Narayan Datta</b></sub></a></td>
+    <td align="center"><a href="https://github.com/daviddprtma"><img src="https://github.com/daviddprtma.png" width="100px;" alt=""/><br /><sub><b>David Pratama</b></sub></a></td>
+    <td align="center"><a href="https://github.com/ArchitaAgrawal912"><img src="https://github.com/ArchitaAgrawal912.png" width="100px;" alt=""/><br /><sub><b>Archita Agrawal</b></sub></a></td>
+    <td align="center"><a href="https://github.com/NITYANIT"><img src="https://github.com/NITYANIT.png" width="100px;" alt=""/><br /><sub><b>Nitya Gattu</b></sub></a></td>
+  </tr>
+</table>
+
+Want to see your name here? Make a contribution and open a PR 🚀
+---
 
 ## 🌟 Overview
 
@@ -241,7 +264,7 @@ AI Output:
 
 ## 📸 Screenshots
 
-![GenForm Dashboard](https://github.com/Amansingh0807/GenForm/blob/master/public/Screenshot%202025-06-17%20154052.png)
+![GenForm Dashboard](public/Screenshot%202025-06-17%20154052.png)
 
 ---
 

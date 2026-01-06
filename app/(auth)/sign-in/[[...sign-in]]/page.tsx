@@ -7,7 +7,8 @@ const SignInPage = () => {
       signUpUrl="/sign-up"
       appearance={{
         elements: {
-          rootBox: "w-full",
+          // make it to the center
+          rootBox: "w-full flex justify-center items-center min-h-screen",
           card: "bg-white/90 dark:bg-gray-900/90 backdrop-blur-xl shadow-2xl border border-gray-200/50 dark:border-gray-700/50 w-full",
           headerTitle: "text-2xl font-bold text-gray-900 dark:text-white",
           headerSubtitle: "text-gray-600 dark:text-gray-400",
