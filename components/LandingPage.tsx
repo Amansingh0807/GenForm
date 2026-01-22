@@ -598,6 +598,56 @@ const LandingPage = ({ userId }: LandingPageProps) => {
               </div>
             </div>
           </div>
+
+          {/* Still have questions */}
+          <div className="mt-10 sm:mt-14">
+            <div className="rounded-2xl border border-gray-200/70 dark:border-gray-700/50 
+                  bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm 
+                  p-6 sm:p-8 text-center
+                  transition-all duration-500
+                  hover:shadow-lg hover:shadow-gray-300/40
+                  dark:hover:shadow-none">
+
+              <h3 className="text-base sm:text-lg font-semibold text-gray-900 dark:text-white mb-2">
+                Still have more questions?
+              </h3>
+
+              <p className="text-sm text-gray-600 dark:text-gray-300 mb-6">
+                We’re happy to help! Reach out to us and we’ll get back to you as soon as possible.
+              </p>
+
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
+                {/* Email Button */}
+                <a
+                  href="mailto:support@yourdomain.com"
+                  className="inline-flex items-center justify-center gap-2
+                   px-5 py-2.5 rounded-xl text-sm font-semibold
+                   bg-green-600 text-white
+                   hover:bg-green-700
+                   transition-all duration-300
+                   shadow-md shadow-green-500/20"
+                >
+                  Send Email
+                </a>
+
+                {/* Contact Us Button */}
+                <a
+                  href="/contact"
+                  className="inline-flex items-center justify-center gap-2
+                   px-5 py-2.5 rounded-xl text-sm font-semibold
+                   rounded-xl
+                   border border-gray-300 dark:border-gray-600
+                   text-gray-900 dark:text-white
+                   hover:bg-gray-100 dark:hover:bg-gray-900/40
+                   transition-all duration-300"
+                >
+                  Contact Us
+                </a>
+              </div>
+            </div>
+          </div>
+
+
         </div>
 
         {/* Pricing Section */}
