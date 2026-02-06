@@ -52,8 +52,8 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
-    "@types/react": "^19.2.10",
-    "@types/react-dom": "^19.2.3",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
     "@types/stripe": "^8.0.417",
     "eslint": "^9.18.0",
     "eslint-config-next": "^15.1.4",
