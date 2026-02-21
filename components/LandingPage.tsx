@@ -68,14 +68,16 @@ const LandingPage = ({ userId }: LandingPageProps) => {
                   <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
                 </Button>
               </Link>
-              <Link href="/dashboard/forms" className="w-full sm:w-auto">
+              <Link href="/demo" className="w-full sm:w-auto">
+
+                {/* <Link href="/dashboard/forms" className="w-full sm:w-auto"> */}
                 <Button
                   size="lg"
                   variant="outline"
                   className="w-full sm:w-auto px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg border-green-500 text-green-500 hover:bg-green-50 dark:hover:bg-green-900/10"
                 >
                   <Sparkles className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
-                  See Examples
+                  See a Demo form
                 </Button>
               </Link>
             </div>
@@ -529,8 +531,8 @@ const LandingPage = ({ userId }: LandingPageProps) => {
                   <div className="overflow-hidden">
                     <p
                       className={`text-xs sm:text-sm text-gray-600 dark:text-gray-300 transition-all duration-700 ease-smooth-out ${openFaq === "customize"
-                          ? "opacity-100 translate-y-0"
-                          : "opacity-0 translate-y-1"
+                        ? "opacity-100 translate-y-0"
+                        : "opacity-0 translate-y-1"
                         }`}
                     >
                       Absolutely! After the AI generates your form, you have full
