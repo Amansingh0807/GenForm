@@ -92,7 +92,7 @@ const FormEditor: React.FC<Props> = ({ form, onSave }) => {
           })) || [],
       });
     }
-  }, [form]);
+  }, [form, loadDraft]);
 
   const addField = () => {
     const newField: FieldType = {
@@ -194,12 +194,14 @@ const FormEditor: React.FC<Props> = ({ form, onSave }) => {
           {formData.formFields.map((field, index) => (
             <Card key={field.id}>
               <CardContent className="p-4 space-y-3">
+                {/* label + controls row */}
                 <div className="flex gap-3 items-center">
                   <Input
                     value={field.label}
                     onChange={(e) =>
                       updateField(field.id, { label: e.target.value })
                     }
+                    placeholder="Field Label"
                   />
 
                   <Button
@@ -228,8 +230,141 @@ const FormEditor: React.FC<Props> = ({ form, onSave }) => {
                     <Trash2 size={14} />
                   </Button>
                 </div>
+
+                {/* type selector */}
+                <div className="space-y-1">
+                  <Label>Field Type</Label>
+                  <Select
+                    value={field.type}
+                    onValueChange={(value) =>
+                      updateField(field.id, { type: value })
+                    }
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Select field type" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {fieldTypes.map((type) => (
+                        <SelectItem key={type.value} value={type.value}>
+                          {type.label}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+
+                {/* placeholder input */}
+                <div className="space-y-1">
+                  <Label>Placeholder</Label>
+                  <Input
+                    value={field.placeholder || ""}
+                    onChange={(e) =>
+                      updateField(field.id, { placeholder: e.target.value })
+                    }
+                    placeholder="Placeholder"
+                  />
+                </div>
+
+                {/* required toggle */}
+                <div className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    checked={field.required}
+                    onChange={(e) =>
+                      updateField(field.id, { required: e.target.checked })
+                    }
+                  />
+                  <Label className="!mb-0">Required</Label>
+                </div>
+
+                {/* options for select/radio/checkbox */}
+                {["select", "radio", "checkbox"].includes(field.type) && (
+                  <div className="space-y-2">
+                    <Label>Options</Label>
+                    {(field.options || []).map((option, idx) => (
+                      <Input
+                        key={idx}
+                        value={option}
+                        onChange={(e) => {
+                          const newOptions = [...(field.options || [])];
+                          newOptions[idx] = e.target.value;
+                          updateField(field.id, { options: newOptions });
+                        }}
+                      />
+                    ))}
+                    <Button
+                      size="sm"
+                      onClick={() =>
+                        updateField(field.id, {
+                          options: [...(field.options || []), "New Option"],
+                        })
+                      }
+                    >
+                      Add Option
+                    </Button>
+                  </div>
+                )}
               </CardContent>
             </Card>
+          ))}
+        </CardContent>
+      </Card>
+
+      {/* live preview card */}
+      <Card>
+        <CardHeader>
+          <CardTitle>Live Preview</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {formData.formFields.map((field) => (
+            <div key={field.id} className="space-y-2 mb-4">
+              <Label>
+                {field.label}
+                {field.required && " *"}
+              </Label>
+
+              {field.type === "textarea" && (
+                <textarea className="w-full border p-2" />
+              )}
+              {field.type === "select" && (
+                <select className="w-full border p-2">
+                  {(field.options || []).map((opt, idx) => (
+                    <option key={idx}>{opt}</option>
+                  ))}
+                </select>
+              )}
+              {field.type === "radio" && (
+                <div className="space-y-1">
+                  {(field.options || []).map((opt, idx) => (
+                    <label key={idx} className="flex items-center gap-2">
+                      <input type="radio" name={field.id} />
+                      {opt}
+                    </label>
+                  ))}
+                </div>
+              )}
+              {field.type === "checkbox" && (
+                <div className="space-y-1">
+                  {(field.options || []).map((opt, idx) => (
+                    <label key={idx} className="flex items-center gap-2">
+                      <input type="checkbox" />
+                      {opt}
+                    </label>
+                  ))}
+                </div>
+              )}
+              {field.type !== "textarea" &&
+                field.type !== "select" &&
+                field.type !== "radio" &&
+                field.type !== "checkbox" && (
+                  <input
+                    className="w-full border p-2"
+                    type={field.type}
+                    placeholder={field.placeholder}
+                    disabled
+                  />
+                )}
+            </div>
           ))}
         </CardContent>
       </Card>
