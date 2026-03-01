@@ -14,26 +14,34 @@ export const ActiveNavbar = () => {
   const [activeSection, setActiveSection] = useState("home");
 
   useEffect(() => {
-    const observerOptions = {
-      root: null,
-      rootMargin: "-45% 0px -45% 0px", // Triggers highlight when section is in the middle of the viewport
-      threshold: 0,
+    const handleScroll = () => {
+      const sections = navItems.map((item) => ({
+        id: item.href.replace("#", ""),
+        element: document.getElementById(item.href.replace("#", "")),
+      }));
+
+      let currentSection = "home";
+
+      for (const section of sections) {
+        if (section.element) {
+          const rect = section.element.getBoundingClientRect();
+          // Check if section is in the upper half of the viewport
+          if (rect.top <= window.innerHeight / 2) {
+            currentSection = section.id;
+          } else {
+            break;
+          }
+        }
+      }
+
+      setActiveSection(currentSection);
     };
 
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          setActiveSection(entry.target.id);
-        }
-      });
-    }, observerOptions);
+    // Set initial active section
+    handleScroll();
 
-    navItems.forEach((item) => {
-      const el = document.getElementById(item.href.replace("#", ""));
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
