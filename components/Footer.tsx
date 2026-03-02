@@ -7,185 +7,141 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="relative w-full overflow-hidden bg-white dark:bg-gray-950">
-      {/* Animated Background Pattern */}
-      <div className="absolute inset-0 overflow-hidden opacity-40">
-        <div className="absolute -top-40 -right-40 w-96 h-96 bg-green-500/10 dark:bg-green-500/5 rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-emerald-500/10 dark:bg-emerald-500/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-teal-500/10 dark:bg-teal-500/5 rounded-full blur-3xl animate-pulse delay-500"></div>
+    <footer className="relative w-full overflow-hidden bg-[#050505] text-white">
+      {/* Top Border Glow Line */}
+      <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-emerald-500/50 to-transparent"></div>
+
+      {/* Precision Background Glows */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-24 left-1/4 w-[500px] h-[300px] bg-emerald-500/5 rounded-full blur-[120px]"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-20 pb-10">
         {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-12">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-20">
           
-          {/* Brand Section - Larger on desktop */}
-          <div className="lg:col-span-5 flex flex-col items-center lg:items-start gap-6">
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-green-600 rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-300"></div>
-              <div className="relative flex items-center gap-3 bg-white dark:bg-gray-900 px-6 py-4 rounded-2xl">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-green-500 rounded-xl blur-md opacity-50"></div>
-                  <div className="relative w-12 h-12  rounded-xl flex items-center justify-center shadow-lg">
-                    <span className="text-white font-bold text-2xl">
-                      <Image src="/genform.png" alt="GenForm Logo" width={48} height={48} priority /> 
-                    </span>
-                  </div>
+          {/* Brand Identity */}
+          <div className="lg:col-span-5 space-y-8 flex flex-col items-center lg:items-start text-center lg:text-left">
+            <Link href="/" className="flex items-center gap-4 group">
+              <div className="relative p-[1px] rounded-2xl bg-gradient-to-tr from-emerald-400 to-blue-500 shadow-2xl shadow-emerald-500/10 transition-transform duration-500 group-hover:rotate-3">
+                <div className="bg-black rounded-[15px] p-2.5">
+                  <Image src="/genform.png" alt="GenForm" width={30} height={30} priority />
                 </div>
-                <h3 className="text-3xl font-black text-green-500 dark:text-green-400">
-                  GenForm
-                </h3>
               </div>
-            </div>
+              <h3 className="text-3xl font-black tracking-tighter uppercase leading-none">
+                Gen<span className="text-emerald-500">Form</span>
+              </h3>
+            </Link>
             
-            <p className="text-base text-gray-700 dark:text-gray-300 text-center lg:text-left max-w-md leading-relaxed">
+            <p className="text-base text-gray-400 font-medium leading-relaxed max-w-sm">
               Transform ideas into beautiful forms with AI magic. Create, customize, and share professional forms in seconds.
             </p>
-            
+
             <div className="flex flex-wrap gap-3">
-              <div className="flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full border border-green-200 dark:border-green-800 shadow-sm">
-                <Sparkles className="w-4 h-4 text-green-500" />
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">AI Powered</span>
+              <div className="flex items-center gap-2 px-4 py-1.5 bg-emerald-500/5 border border-emerald-500/10 rounded-full shadow-inner">
+                <Sparkles className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="text-[10px] font-black uppercase tracking-widest text-emerald-400">AI Logic</span>
               </div>
-              <div className="flex items-center gap-2 px-4 py-2 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm rounded-full border border-blue-200 dark:border-blue-800 shadow-sm">
-                <Zap className="w-4 h-4 text-blue-500" />
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">500+ Users</span>
+              <div className="flex items-center gap-2 px-4 py-1.5 bg-blue-500/5 border border-blue-500/10 rounded-full shadow-inner">
+                <Zap className="w-3.5 h-3.5 text-blue-400" />
+                <span className="text-[10px] font-black uppercase tracking-widest text-blue-400">Trusted by 500+</span>
               </div>
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div className="lg:col-span-3 flex flex-col items-center lg:items-start gap-5">
-            <h4 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-widest flex items-center gap-2">
-              <div className="w-8 h-0.5 bg-green-500"></div>
-              Navigate
-            </h4>
-            <ul className="space-y-3 text-center lg:text-left">
-              <li>
-                <Link 
-                  href="/dashboard/forms" 
-                  className="group inline-flex items-center gap-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-green-500 dark:hover:text-green-400 transition-all hover:translate-x-2 cursor-pointer"
-                >
-                  <span className="w-2 h-2 rounded-full bg-green-500 group-hover:shadow-lg group-hover:shadow-green-500/50 transition-all"></span>
-                  Dashboard
-                  <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/dashboard/analytics" 
-                  className="group inline-flex items-center gap-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-all hover:translate-x-2 cursor-pointer"
-                >
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 group-hover:shadow-lg group-hover:shadow-emerald-500/50 transition-all"></span>
-                  Analytics
-                  <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </Link>
-              </li>
-              <li>
-                <Link 
-                  href="/dashboard/upgrade" 
-                  className="group inline-flex items-center gap-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-cyan-600 dark:hover:text-cyan-400 transition-all hover:translate-x-2 cursor-pointer"
-                >
-                  <span className="w-2 h-2 rounded-full bg-teal-500 group-hover:shadow-lg group-hover:shadow-teal-500/50 transition-all"></span>
-                  Pricing
-                  <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </Link>
-              </li>
-              <li>
-                <a 
-                  href="https://github.com/Amansingh0807/GenForm" 
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex items-center gap-2 text-base font-medium text-gray-700 dark:text-gray-300 hover:text-green-600 dark:hover:text-green-400 transition-all hover:translate-x-2 cursor-pointer"
-                >
-                  <span className="w-2 h-2 rounded-full bg-green-500 group-hover:shadow-lg group-hover:shadow-green-500/50 transition-all"></span>
-                  Repository
-                  <ArrowUpRight className="w-4 h-4 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </a>
-              </li>
+          {/* Navigation with Animated Dots */}
+          <div className="lg:col-span-3 flex flex-col items-center lg:items-start gap-6">
+            <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500 mb-2">Navigate</h4>
+            <ul className="space-y-4">
+              {[
+                { name: 'Dashboard', href: '/dashboard/forms' },
+                { name: 'Analytics', href: '/dashboard/analytics' },
+                { name: 'Pricing', href: '/dashboard/upgrade' },
+                { name: 'Source Code', href: 'https://github.com/Amansingh0807/GenForm', external: true }
+              ].map((link) => (
+                <li key={link.name}>
+                  <Link 
+                    href={link.href} 
+                    target={link.external ? "_blank" : "_self"}
+                    className="group flex items-center gap-3 text-sm font-bold text-gray-400 hover:text-white transition-all duration-300"
+                  >
+                    <span className="relative flex h-1.5 w-1.5">
+                        <span className="group-hover:animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-0 group-hover:opacity-75 transition-opacity"></span>
+                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-emerald-500/50 group-hover:bg-emerald-400 transition-colors"></span>
+                    </span>
+                    {link.name}
+                    <ArrowUpRight className="w-3 h-3 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Connect Section */}
-          <div className="lg:col-span-4 flex flex-col items-center lg:items-start gap-5">
-            <h4 className="text-sm font-bold text-gray-900 dark:text-white uppercase tracking-widest flex items-center gap-2">
-              <div className="w-8 h-0.5 bg-green-500"></div>
-              Connect
-            </h4>
-            <div className="flex gap-4">
+          {/* Social Connectivity */}
+          <div className="lg:col-span-4 flex flex-col items-center lg:items-start gap-6">
+            <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-gray-500 mb-2">Connect</h4>
+            <div className="grid grid-cols-3 gap-3">
+              {[
+                { icon: <Github size={20} />, href: "https://github.com/Amansingh0807", color: "hover:bg-gray-800" },
+                { icon: <Linkedin size={20} />, href: "https://www.linkedin.com/in/amansingh08/", color: "hover:bg-blue-600" },
+                { icon: <Twitter size={20} />, href: "https://x.com/RealAman_Singh", color: "hover:bg-black" }
+              ].map((social, i) => (
+                <a 
+                    key={i} 
+                    href={social.href} 
+                    target="_blank" 
+                    className={`w-12 h-12 flex items-center justify-center rounded-2xl bg-white/5 border border-white/10 text-gray-400 transition-all duration-500 ${social.color} hover:text-white hover:-translate-y-1 hover:shadow-xl hover:shadow-emerald-500/10`}
+                >
+                  {social.icon}
+                </a>
+              ))}
+            </div>
+            <p className="text-xs text-gray-500 italic">Built for the future of forms.</p>
+          </div>
+        </div>
+
+        {/* Enhanced Bottom Section */}
+        <div className="pt-10 border-t border-white/5 flex flex-col items-center gap-8">
+          
+          {/* Signature Badge - More Professional & Centered */}
+          <div className="relative group overflow-hidden px-6 py-2.5 bg-gradient-to-b from-white/[0.07] to-transparent backdrop-blur-2xl border border-white/10 rounded-full shadow-2xl transition-all duration-500 hover:border-emerald-500/40">
+            <div className="absolute inset-0 bg-emerald-500/5 translate-y-10 group-hover:translate-y-0 transition-transform duration-500"></div>
+            <div className="relative flex items-center gap-3">
+              <span className="text-[11px] font-bold text-gray-400 uppercase tracking-tighter">Crafted with</span>
+              <Heart className="w-4 h-4 text-red-500 fill-red-500 animate-pulse" />
+              <span className="text-[11px] font-bold text-gray-400 uppercase tracking-tighter">by</span>
               <a
                 href="https://github.com/Amansingh0807"
                 target="_blank"
                 rel="noopener noreferrer"
-                aria-label="GitHub"
-                className="group relative"
+                className="text-sm font-black text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-blue-400 to-emerald-400 bg-[length:200%_auto] animate-gradient-x"
               >
-                <div className="absolute -inset-2 bg-gray-600 rounded-2xl blur opacity-0 group-hover:opacity-30 transition duration-300"></div>
-                <div className="relative w-14 h-14 rounded-2xl bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center hover:border-gray-900 dark:hover:border-gray-500 hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 cursor-pointer">
-                  <Github className="w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors" />
-                </div>
-              </a>
-              <a
-                href="https://www.linkedin.com/in/amansingh08/"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="LinkedIn"
-                className="group relative"
-              >
-                <div className="absolute -inset-2 bg-blue-500 rounded-2xl blur opacity-0 group-hover:opacity-40 transition duration-300"></div>
-                <div className="relative w-14 h-14 rounded-2xl bg-white dark:bg-gray-800 border-2 border-blue-200 dark:border-blue-900 flex items-center justify-center hover:border-[#0077b5] hover:bg-[#0077b5] hover:-translate-y-2 hover:shadow-2xl hover:shadow-blue-500/50 transition-all duration-300 cursor-pointer">
-                  <Linkedin className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors" />
-                </div>
-              </a>
-              <a
-                href="https://x.com/RealAman_Singh"
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label="X (Twitter)"
-                className="group relative"
-              >
-                <div className="absolute -inset-2 bg-gray-800 rounded-2xl blur opacity-0 group-hover:opacity-30 transition duration-300"></div>
-                <div className="relative w-14 h-14 rounded-2xl bg-white dark:bg-gray-800 border-2 border-gray-200 dark:border-gray-700 flex items-center justify-center hover:border-black hover:bg-black hover:-translate-y-2 hover:shadow-2xl transition-all duration-300 cursor-pointer">
-                  <Twitter className="w-6 h-6 text-gray-700 dark:text-gray-300 group-hover:text-white transition-colors" />
-                </div>
+                AMAN SINGH
               </a>
             </div>
-            <p className="text-sm text-gray-600 dark:text-gray-400 text-center lg:text-left">
-              Follow for updates, tips & exclusive features
-            </p>
           </div>
-        </div>
 
-        {/* Divider */}
-        <div className="relative mb-8">
-          <div className="w-full h-px bg-green-500/20"></div>
-        </div>
-
-        {/* Bottom Section */}
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400">
-            <span className="font-medium">© {currentYear}</span>
-            <span className="text-gray-400 dark:text-gray-600">•</span>
-            <span className="font-bold bg-gradient-to-r from-green-600 to-blue-600 bg-clip-text text-transparent">GenForm</span>
-            <span className="text-gray-400 dark:text-gray-600">•</span>
+          {/* Minimal Meta Info */}
+          <div className="flex items-center gap-4 text-[9px] font-black uppercase tracking-[0.3em] text-gray-600">
+            <span>© {currentYear} GENFORM</span>
+            <div className="h-1 w-1 rounded-full bg-emerald-500/20"></div>
+            <span className="text-gray-500 hover:text-emerald-400 transition-colors">Privacy</span>
+            <div className="h-1 w-1 rounded-full bg-emerald-500/20"></div>
             <span>All rights reserved</span>
-          </div>
-          
-          <div className="flex items-center gap-2 px-5 py-2.5 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-full border border-gray-200 dark:border-gray-700 shadow-lg">
-            <span className="text-sm text-gray-600 dark:text-gray-400">Crafted with</span>
-            <Heart className="w-4 h-4 text-red-500 fill-red-500 animate-pulse" />
-            <span className="text-sm text-gray-600 dark:text-gray-400">by</span>
-            <a
-              href="https://github.com/Amansingh0807"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-600 via-blue-600 to-cyan-600 hover:from-green-700 hover:via-blue-700 hover:to-cyan-700 transition-all cursor-pointer"
-            >
-              Aman Singh
-            </a>
           </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes gradient-x {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        .animate-gradient-x {
+          animation: gradient-x 3s linear infinite;
+        }
+      `}</style>
     </footer>
   );
 };
