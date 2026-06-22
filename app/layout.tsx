@@ -1,6 +1,6 @@
 export const dynamic = "force-dynamic";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Syne, Space_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { ThemeProvider } from "@/components/theme-provider";
@@ -11,6 +11,18 @@ import BackToTopButton from "@/components/ui/back-to-top";
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
+});
+
+const syne = Syne({
+  variable: "--font-syne",
+  subsets: ["latin"],
+  weight: ["400", "500", "700", "800"],
+});
+
+const spaceMono = Space_Mono({
+  variable: "--font-space-mono",
+  subsets: ["latin"],
+  weight: ["400", "700"],
 });
 
 export const metadata: Metadata = {
@@ -52,7 +64,7 @@ export default function RootLayout({
     <ClerkProvider>
       <html lang="en" suppressHydrationWarning>
         <body
-          className={`${inter.variable} antialiased`}
+          className={`${inter.variable} ${syne.variable} ${spaceMono.variable} antialiased`}
         >
           <ThemeProvider
             attribute="class"
