@@ -4,24 +4,24 @@ import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
 
 // Define public routes that don't require authentication
-const isPublicRoute = createRouteMatcher(['/', '/sign-in(.*)', '/sign-up(.*)']);
+const isPublicRoute = createRouteMatcher(['/', '/sign-in(.*)', '/sign-up(.*)', '/demo(.*)']);
 
 // Graceful Redis Initialization
 // This prevents crashes in CI/Build environments where env vars might be missing
 const redis = (process.env.UPSTASH_REDIS_REST_URL && process.env.UPSTASH_REDIS_REST_TOKEN)
   ? new Redis({
-      url: process.env.UPSTASH_REDIS_REST_URL,
-      token: process.env.UPSTASH_REDIS_REST_TOKEN,
-    })
+    url: process.env.UPSTASH_REDIS_REST_URL,
+    token: process.env.UPSTASH_REDIS_REST_TOKEN,
+  })
   : null; // Return null if config is missing
 
 // Initialize Rate Limiter safely
 const ratelimit = redis
   ? new Ratelimit({
-      redis: redis,
-      limiter: Ratelimit.slidingWindow(10, "10 m"),
-      analytics: true,
-    })
+    redis: redis,
+    limiter: Ratelimit.slidingWindow(10, "10 m"),
+    analytics: true,
+  })
   : null;
 
 export default clerkMiddleware(async (auth, req) => {

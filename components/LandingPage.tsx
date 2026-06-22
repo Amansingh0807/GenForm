@@ -5,6 +5,7 @@ import { ArrowRight, CheckCircle, Sparkles, Zap, Shield, Users, BarChart3, Clock
 import Link from "next/link";
 import PricingPage from "./PricingPage";
 import Footer from "./Footer";
+import { StatCounter } from "./ui/StatCounter";
 
 interface LandingPageProps {
   userId?: string | null;
@@ -67,14 +68,16 @@ const LandingPage = ({ userId }: LandingPageProps) => {
                   <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
                 </Button>
               </Link>
-              <Link href="/dashboard/forms" className="w-full sm:w-auto">
+              <Link href="/demo" className="w-full sm:w-auto">
+
+                {/* <Link href="/dashboard/forms" className="w-full sm:w-auto"> */}
                 <Button
                   size="lg"
                   variant="outline"
                   className="w-full sm:w-auto px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg border-green-500 text-green-500 hover:bg-green-50 dark:hover:bg-green-900/10"
                 >
                   <Sparkles className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
-                  See Examples
+                  See a Demo form
                 </Button>
               </Link>
             </div>
@@ -286,24 +289,24 @@ const LandingPage = ({ userId }: LandingPageProps) => {
           <div className="relative group bg-green-500 animate-breathe rounded-2xl sm:rounded-3xl p-6 sm:p-10 md:p-12 mb-12 sm:mb-16 md:mb-20 shadow-2xl shadow-green-500/20 transition-all shadow-xl duration-500 hover:scale-[1.02] border border-white/10 hover:border-white ">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center text-white">
               <div>
-                <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 sm:mb-2">
-                  1k+
+                <div className="text-4xl font-bold">
+                  <StatCounter endValue={1} suffix="k+" />
                 </div>
                 <div className="text-xs sm:text-sm md:text-base text-green-50">
                   Forms Created
                 </div>
               </div>
               <div>
-                <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 sm:mb-2">
-                  500+
+                <div className="text-4xl font-bold">
+                  <StatCounter endValue={500} suffix="+" />
                 </div>
                 <div className="text-xs sm:text-sm md:text-base text-green-50">
                   Happy Users
                 </div>
               </div>
               <div>
-                <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 sm:mb-2">
-                  99.9%
+                <div className="text-4xl font-bold">
+                  <StatCounter endValue={99.9} suffix="%" decimals={1} />
                 </div>
                 <div className="text-xs sm:text-sm md:text-base text-green-50">
                   Uptime
