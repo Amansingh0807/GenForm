@@ -19,7 +19,7 @@ const LandingPage = ({ userId }: LandingPageProps) => {
   return (
     <div className="min-h-screen">
       {/* Hero Section with Background Pattern */}
-      <div id="home" className="relative overflow-hidden bg-white dark:bg-gray-950">
+      <div className="relative overflow-hidden bg-white dark:bg-gray-950">
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden">
           <div className="absolute -top-40 -right-32 w-80 h-80 rounded-full bg-green-500/10 dark:bg-green-500/5 blur-3xl animate-pulse"></div>
@@ -94,7 +94,7 @@ const LandingPage = ({ userId }: LandingPageProps) => {
         </div>
 
         {/* Features Section */}
-        <div id="features" className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
           <div className="text-center mb-10 sm:mb-12 md:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
               Why Choose GenForm?
@@ -221,12 +221,12 @@ const LandingPage = ({ userId }: LandingPageProps) => {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 text-center">
               {/* Step 1 */}
               <div className="flex flex-col items-center px-4 group">
-                <div className="relative mb-6">
-                  <div className="absolute inset-0 bg-green-400 rounded-full blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
-                  <div className="absolute inset-2 bg-green-500/30 border border-green-600 rounded-full blur-xl opacity-50  transition duration-300 group-hover:opacity-80" />
-                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center shadow-sm border border-green-500/70 dark:border-green-900/30 transition-transform duration-300 group-hover:scale-110 ">
-                    <FileText
-                      className="relative z-10 w-8 h-8 sm:w-10 sm:h-10 text-green-600 dark:text-green-400"
+              <div className="relative mb-6">
+              <div className="absolute inset-0 bg-green-400 rounded-full blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
+              <div className="absolute inset-2 bg-green-500/30 border border-green-600 rounded-full blur-xl opacity-50  transition duration-300 group-hover:opacity-80" />
+              <div className="relative w-16 h-16 sm:w-20 sm:h-20 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center shadow-sm border border-green-500/70 dark:border-green-900/30 transition-transform duration-300 group-hover:scale-110 ">
+                    <FileText 
+                      className="relative z-10 w-8 h-8 sm:w-10 sm:h-10 text-green-600 dark:text-green-400" 
                       strokeWidth={2}
                     />
                   </div>
@@ -242,11 +242,11 @@ const LandingPage = ({ userId }: LandingPageProps) => {
               {/* Step 2 */}
               <div className="flex flex-col items-center px-4 group">
                 <div className="relative mb-6">
-                  <div className="absolute inset-0 bg-green-400 rounded-full blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
-                  <div className="absolute inset-2 bg-green-500/30 border border-green-600 rounded-full blur-xl opacity-50  transition duration-300 group-hover:opacity-80" />
-                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center shadow-sm border border-green-500/70 dark:border-green-900/30 transition-transform duration-300 group-hover:scale-110 ">
-                    <Sparkles
-                      className="relative z-10 w-8 h-8 sm:w-10 sm:h-10 text-green-600 dark:text-green-400"
+                <div className="absolute inset-0 bg-green-400 rounded-full blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
+                <div className="absolute inset-2 bg-green-500/30 border border-green-600 rounded-full blur-xl opacity-50  transition duration-300 group-hover:opacity-80" />
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center shadow-sm border border-green-500/70 dark:border-green-900/30 transition-transform duration-300 group-hover:scale-110 ">
+                      <Sparkles 
+                      className="relative z-10 w-8 h-8 sm:w-10 sm:h-10 text-green-600 dark:text-green-400" 
                       strokeWidth={2}
                     />
                   </div>
@@ -262,11 +262,11 @@ const LandingPage = ({ userId }: LandingPageProps) => {
               {/* Step 3 */}
               <div className="flex flex-col items-center px-4 group">
                 <div className="relative mb-6">
-                  <div className="absolute inset-0 bg-green-400 rounded-full blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
-                  <div className="absolute inset-2 bg-green-500/30 border border-green-600 rounded-full blur-xl opacity-50  transition duration-300 group-hover:opacity-80" />
-                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center shadow-sm border border-green-500/70 dark:border-green-900/30 transition-transform duration-300 group-hover:scale-110 ">
-                    <Share2
-                      className="relative z-10 w-8 h-8 sm:w-10 sm:h-10 text-green-600 dark:text-green-400"
+                <div className="absolute inset-0 bg-green-400 rounded-full blur-2xl opacity-20 group-hover:opacity-40 transition-opacity duration-500" />
+                <div className="absolute inset-2 bg-green-500/30 border border-green-600 rounded-full blur-xl opacity-50  transition duration-300 group-hover:opacity-80" />
+                <div className="relative w-16 h-16 sm:w-20 sm:h-20 bg-white dark:bg-gray-900 rounded-full flex items-center justify-center shadow-sm border border-green-500/70 dark:border-green-900/30 transition-transform duration-300 group-hover:scale-110 ">
+                      <Share2 
+                      className="relative z-10 w-8 h-8 sm:w-10 sm:h-10 text-green-600 dark:text-green-400" 
                       strokeWidth={2}
                     />
                   </div>
@@ -321,7 +321,7 @@ const LandingPage = ({ userId }: LandingPageProps) => {
           </div>
 
           {/* Testimonials Section */}
-          <div id="testimonials" className="mb-12 sm:mb-16 md:mb-20">
+          <div className="mb-12 sm:mb-16 md:mb-20">
             <div className="text-center mb-10 sm:mb-12">
               <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
                 Loved by Teams Worldwide
@@ -421,7 +421,7 @@ const LandingPage = ({ userId }: LandingPageProps) => {
         </div>
 
         {/* FAQ Section */}
-        <div id="faqs" className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
+        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
           <div className="text-center mb-10 sm:mb-12 md:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
               Frequently Asked Questions
@@ -433,8 +433,9 @@ const LandingPage = ({ userId }: LandingPageProps) => {
               whole header (question row) is clickable and animations are
               consistent across browsers. */}
             <div
-              className={`group rounded-2xl border border-gray-200/70 dark:border-gray-700/50 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm cursor-pointer transition-all duration-500 ease-smooth-in-out hover:bg-white/80 dark:hover:bg-gray-900/30 hover:shadow-md hover:shadow-gray-300/40 dark:hover:shadow-none focus-within:ring-2 focus-within:ring-green-500/20 focus-within:border-green-200 ${openFaq === "forms" ? "shadow-xl shadow-gray-300/40 border-green-200" : ""
-                }`}
+              className={`group rounded-2xl border border-gray-200/70 dark:border-gray-700/50 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm cursor-pointer transition-all duration-500 ease-[cubic-bezier(.2,.8,.2,1)] hover:bg-white/80 dark:hover:bg-gray-900/30 hover:shadow-md hover:shadow-gray-300/40 dark:hover:shadow-none focus-within:ring-2 focus-within:ring-green-500/20 focus-within:border-green-200 ${
+                openFaq === "forms" ? "shadow-xl shadow-gray-300/40 border-green-200" : ""
+              }`}
             >
               <button
                 type="button"
@@ -446,8 +447,9 @@ const LandingPage = ({ userId }: LandingPageProps) => {
                 <HelpCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-1 sm:mt-0" />
                 <span className="flex-1">How many forms can I create?</span>
                 <span
-                  className={`ml-3 transform transition-transform duration-700 ease-smooth-out ${openFaq === "forms" ? "rotate-180" : ""
-                    }`}
+                  className={`ml-3 transform transition-transform duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
+                    openFaq === "forms" ? "rotate-180" : ""
+                  }`}
                 >
                   <svg
                     width="20"
@@ -467,15 +469,17 @@ const LandingPage = ({ userId }: LandingPageProps) => {
                 {/* Content expansion uses a grid-rows transition to mimic
                     auto-height; text also fades/slides for a smooth feel */}
                 <div
-                  className={`grid transition-[grid-template-rows] duration-700 ease-smooth-out ${openFaq === "forms" ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                    }`}
+                  className={`grid transition-[grid-template-rows] duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
+                    openFaq === "forms" ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  }`}
                 >
                   <div className="overflow-hidden">
                     <p
-                      className={`text-xs sm:text-sm text-gray-600 dark:text-gray-300 transition-all duration-700 ease-smooth-out ${openFaq === "forms"
+                      className={`text-xs sm:text-sm text-gray-600 dark:text-gray-300 transition-all duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
+                        openFaq === "forms"
                           ? "opacity-100 translate-y-0"
                           : "opacity-0 translate-y-1"
-                        }`}
+                      }`}
                     >
                       With our free plan, you can create up to 3 forms with AI. If you
                       need more, our Pro plan offers unlimited AI-powered form
@@ -488,8 +492,9 @@ const LandingPage = ({ userId }: LandingPageProps) => {
 
             {/* FAQ 2 */}
             <div
-              className={`group rounded-2xl border border-gray-200/70 dark:border-gray-700/50 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm cursor-pointer transition-all duration-500 ease-smooth-in-out hover:bg-white/80 dark:hover:bg-gray-900/30 hover:shadow-md hover:shadow-gray-300/40 dark:hover:shadow-none focus-within:ring-2 focus-within:ring-green-500/20 focus-within:border-green-200 ${openFaq === "customize" ? "shadow-xl shadow-gray-300/40 border-green-200" : ""
-                }`}
+              className={`group rounded-2xl border border-gray-200/70 dark:border-gray-700/50 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm cursor-pointer transition-all duration-500 ease-[cubic-bezier(.2,.8,.2,1)] hover:bg-white/80 dark:hover:bg-gray-900/30 hover:shadow-md hover:shadow-gray-300/40 dark:hover:shadow-none focus-within:ring-2 focus-within:ring-green-500/20 focus-within:border-green-200 ${
+                openFaq === "customize" ? "shadow-xl shadow-gray-300/40 border-green-200" : ""
+              }`}
             >
               <button
                 type="button"
@@ -501,8 +506,9 @@ const LandingPage = ({ userId }: LandingPageProps) => {
                 <HelpCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-1 sm:mt-0" />
                 <span className="flex-1">Can I customize the forms?</span>
                 <span
-                  className={`ml-3 transform transition-transform duration-700 ease-smooth-out ${openFaq === "customize" ? "rotate-180" : ""
-                    }`}
+                  className={`ml-3 transform transition-transform duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
+                    openFaq === "customize" ? "rotate-180" : ""
+                  }`}
                 >
                   <svg
                     width="20"
@@ -522,15 +528,17 @@ const LandingPage = ({ userId }: LandingPageProps) => {
                 {/* Content expansion uses a grid-rows transition to mimic
                     auto-height; text also fades/slides for a smooth feel */}
                 <div
-                  className={`grid transition-[grid-template-rows] duration-700 ease-smooth-out ${openFaq === "customize" ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                    }`}
+                  className={`grid transition-[grid-template-rows] duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
+                    openFaq === "customize" ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  }`}
                 >
                   <div className="overflow-hidden">
                     <p
-                      className={`text-xs sm:text-sm text-gray-600 dark:text-gray-300 transition-all duration-700 ease-smooth-out ${openFaq === "customize"
+                      className={`text-xs sm:text-sm text-gray-600 dark:text-gray-300 transition-all duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
+                        openFaq === "customize"
                           ? "opacity-100 translate-y-0"
                           : "opacity-0 translate-y-1"
-                        }`}
+                      }`}
                     >
                       Absolutely! After the AI generates your form, you have full
                       control to edit, add, remove, and reorder fields. You can also
@@ -543,8 +551,9 @@ const LandingPage = ({ userId }: LandingPageProps) => {
 
             {/* FAQ 3 */}
             <div
-              className={`group rounded-2xl border border-gray-200/70 dark:border-gray-700/50 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm cursor-pointer transition-all duration-500 ease-smooth-in-out hover:bg-white/80 dark:hover:bg-gray-900/30 hover:shadow-md hover:shadow-gray-300/40 dark:hover:shadow-none focus-within:ring-2 focus-within:ring-green-500/20 focus-within:border-green-200 ${openFaq === "submissions" ? "shadow-xl shadow-gray-300/40 border-green-200" : ""
-                }`}
+              className={`group rounded-2xl border border-gray-200/70 dark:border-gray-700/50 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm cursor-pointer transition-all duration-500 ease-[cubic-bezier(.2,.8,.2,1)] hover:bg-white/80 dark:hover:bg-gray-900/30 hover:shadow-md hover:shadow-gray-300/40 dark:hover:shadow-none focus-within:ring-2 focus-within:ring-green-500/20 focus-within:border-green-200 ${
+                openFaq === "submissions" ? "shadow-xl shadow-gray-300/40 border-green-200" : ""
+              }`}
             >
               <button
                 type="button"
@@ -558,8 +567,9 @@ const LandingPage = ({ userId }: LandingPageProps) => {
                 <HelpCircle className="w-5 h-5 text-teal-500 flex-shrink-0 mt-1 sm:mt-0" />
                 <span className="flex-1">How do I see the submissions?</span>
                 <span
-                  className={`ml-3 transform transition-transform duration-700 ease-smooth-out ${openFaq === "submissions" ? "rotate-180" : ""
-                    }`}
+                  className={`ml-3 transform transition-transform duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
+                    openFaq === "submissions" ? "rotate-180" : ""
+                  }`}
                 >
                   <svg
                     width="20"
@@ -579,15 +589,17 @@ const LandingPage = ({ userId }: LandingPageProps) => {
                 {/* Content expansion uses a grid-rows transition to mimic
                     auto-height; text also fades/slides for a smooth feel */}
                 <div
-                  className={`grid transition-[grid-template-rows] duration-700 ease-smooth-out ${openFaq === "submissions" ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                    }`}
+                  className={`grid transition-[grid-template-rows] duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
+                    openFaq === "submissions" ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  }`}
                 >
                   <div className="overflow-hidden">
                     <p
-                      className={`text-xs sm:text-sm text-gray-600 dark:text-gray-300 transition-all duration-700 ease-smooth-out ${openFaq === "submissions"
+                      className={`text-xs sm:text-sm text-gray-600 dark:text-gray-300 transition-all duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
+                        openFaq === "submissions"
                           ? "opacity-100 translate-y-0"
                           : "opacity-0 translate-y-1"
-                        }`}
+                      }`}
                     >
                       All submissions for your forms are available in your dashboard.
                       You can view individual submissions and see an overview in the
@@ -601,7 +613,7 @@ const LandingPage = ({ userId }: LandingPageProps) => {
         </div>
 
         {/* Pricing Section */}
-        <div id="pricing" className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
           <PricingPage userId={userId ?? undefined} />
         </div>
 
