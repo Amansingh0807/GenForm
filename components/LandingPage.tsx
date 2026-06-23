@@ -621,26 +621,65 @@ const LandingPage = ({ userId }: LandingPageProps) => {
         </div>
 
         {/* CTA Section */}
-        <div className="relative z-10 py-12 sm:py-16 md:py-20">
-          <div className="bg-green-500  p-6 sm:p-10 md:p-12 text-center shadow-2xl shadow-green-500/20">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-3 sm:mb-4">
-              Ready to Get Started?
+        <div className="relative z-10 py-12 sm:py-16 md:py-20 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          
+          {/* Atmospheric background glow */}
+          <div className="absolute inset-0 pointer-events-none opacity-25 dark:opacity-30 overflow-hidden select-none">
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[350px] sm:w-[500px] h-[350px] sm:h-[500px] bg-gradient-to-r from-emerald-500/20 to-blue-500/20 rounded-full blur-[80px] sm:blur-[120px] animate-pulse duration-[8s]" />
+          </div>
+
+          <div className="relative overflow-hidden rounded-3xl border border-gray-200 dark:border-gray-800/80 bg-white/80 dark:bg-gray-950/60 p-8 sm:p-12 md:p-16 text-center shadow-xl dark:shadow-2xl backdrop-blur-md transition-colors duration-300">
+            {/* Subtle card grid lines */}
+            <div 
+              className="absolute inset-0 pointer-events-none opacity-30 dark:opacity-20 select-none" 
+              style={{ 
+                backgroundImage: "radial-gradient(circle, rgba(16,185,129,0.15) 1px, transparent 1px)", 
+                backgroundSize: "20px 20px" 
+              }} 
+            />
+
+            {/* Title in Syne typography */}
+            <h2 className="relative z-10 text-3xl sm:text-4xl md:text-5xl font-extrabold font-syne text-gray-900 dark:text-white tracking-tight leading-tight mb-4 max-w-2xl mx-auto">
+              Ready to Build Your Next Form?
             </h2>
-            <p className="text-base sm:text-lg md:text-xl text-green-50 mb-6 sm:mb-8 px-4">
-              Join thousands of users creating amazing forms with AI
+
+            {/* Sub-paragraph */}
+            <p className="relative z-10 text-sm sm:text-base text-gray-500 dark:text-gray-400 font-sans mb-8 max-w-xl mx-auto leading-relaxed">
+              Transform descriptive raw text queries into fully optimized, responsive, and functional form interfaces in under 5 seconds.
             </p>
-            <Link href="/sign-up" className="inline-block w-full sm:w-auto">
-              <Button
-                size="lg"
-                className="w-full sm:w-auto bg-white text-green-600 hover:bg-gray-50 px-6 sm:px-8 py-5 sm:py-6 text-sm sm:text-base md:text-lg font-semibold shadow-xl"
-              >
-                <span className="hidden sm:inline">
-                  Create Your First Form - It&apos;s Free
-                </span>
-                <span className="sm:hidden">Get Started Free</span>
-                <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
-              </Button>
-            </Link>
+
+            {/* Telemetry Metric Capsules in Space Mono */}
+            <div className="relative z-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-8 sm:mb-10 font-mono text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 dark:bg-gray-900 border border-slate-200 dark:border-gray-800/80 rounded-lg shadow-sm dark:shadow-none transition-colors">
+                <Zap className="w-3.5 h-3.5 text-emerald-500" />
+                DEPLOY TIME: &lt; 5s
+              </div>
+              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 dark:bg-gray-900 border border-slate-200 dark:border-gray-800/80 rounded-lg shadow-sm dark:shadow-none transition-colors">
+                <Sparkles className="w-3.5 h-3.5 text-blue-500 dark:text-blue-400" />
+                ZERO CODE NEEDED
+              </div>
+              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-slate-100 dark:bg-gray-900 border border-slate-200 dark:border-gray-800/80 rounded-lg shadow-sm dark:shadow-none transition-colors">
+                <CheckCircle className="w-3.5 h-3.5 text-emerald-500" />
+                OPTIMIZED CONVERSION
+              </div>
+            </div>
+
+            {/* Main Action Call */}
+            <div className="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link href="/sign-up" className="w-full sm:w-auto">
+                <Button
+                  size="lg"
+                  className="w-full sm:w-auto font-syne font-bold px-8 py-6 text-sm sm:text-base text-white bg-emerald-600 hover:bg-emerald-500 border-none transition-all duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-emerald-500/20 group cursor-pointer rounded-xl"
+                >
+                  <span className="hidden sm:inline">
+                    Create Your First Form - It&apos;s Free
+                  </span>
+                  <span className="sm:hidden">Get Started Free</span>
+                  <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+                </Button>
+              </Link>
+            </div>
+
           </div>
         </div>
 
