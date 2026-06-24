@@ -1,11 +1,12 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 import { Button } from "./ui/button";
-import { ArrowRight, CheckCircle, Sparkles, Zap, Shield, Users, BarChart3, Clock, Star, FileText, Share2, Edit, HelpCircle } from "lucide-react";
+import { ArrowRight, CheckCircle, Sparkles, Zap, Shield, Users, BarChart3, Clock, Star, FileText, Share2, Edit } from "lucide-react";
 import Link from "next/link";
 import PricingPage from "./PricingPage";
 import Footer from "./Footer";
 import { StatCounter } from "./ui/StatCounter";
+import FaqSection from "./faq/FaqSection";
 
 interface LandingPageProps {
   userId?: string | null;
@@ -15,7 +16,7 @@ const LandingPage = ({ userId }: LandingPageProps) => {
   // Track which FAQ item is open. Using React state lets us control
   // animations and click targets precisely (we replaced native
   // <details>/<summary> so the whole header is clickable).
-  const [openFaq, setOpenFaq] = useState<"forms" | "customize" | "submissions" | null>(null);
+
 
   return (
     <div className="min-h-screen">
@@ -423,197 +424,7 @@ const LandingPage = ({ userId }: LandingPageProps) => {
           </div>
         </div>
 
-        {/* FAQ Section */}
-        <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
-          <div className="text-center mb-10 sm:mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
-              Frequently Asked Questions
-            </h2>
-          </div>
-          <div className="space-y-4">
-            {/* FAQ 1
-              Replaced native <details> with a state-driven panel so the
-              whole header (question row) is clickable and animations are
-              consistent across browsers. */}
-            <div
-              className={`group rounded-2xl border border-gray-200/70 dark:border-gray-700/50 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm cursor-pointer transition-all duration-500 ease-[cubic-bezier(.2,.8,.2,1)] hover:bg-white/80 dark:hover:bg-gray-900/30 hover:shadow-md hover:shadow-gray-300/40 dark:hover:shadow-none focus-within:ring-2 focus-within:ring-green-500/20 focus-within:border-green-200 ${
-                openFaq === "forms" ? "shadow-xl shadow-gray-300/40 border-green-200" : ""
-              }`}
-            >
-              <button
-                type="button"
-                onClick={() =>
-                  setOpenFaq((prev) => (prev === "forms" ? null : "forms"))
-                }
-                className="flex w-full items-start sm:items-center gap-3 p-4 sm:p-6 font-semibold text-sm sm:text-base text-gray-900 dark:text-white text-left focus-visible:outline-none"
-              >
-                <HelpCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-1 sm:mt-0" />
-                <span className="flex-1">How many forms can I create?</span>
-                <span
-                  className={`ml-3 transform transition-transform duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
-                    openFaq === "forms" ? "rotate-180" : ""
-                  }`}
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </span>
-              </button>
-              <div className="px-4 pb-4 sm:px-6 sm:pb-6">
-                {/* Content expansion uses a grid-rows transition to mimic
-                    auto-height; text also fades/slides for a smooth feel */}
-                <div
-                  className={`grid transition-[grid-template-rows] duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
-                    openFaq === "forms" ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <p
-                      className={`text-xs sm:text-sm text-gray-600 dark:text-gray-300 transition-all duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
-                        openFaq === "forms"
-                          ? "opacity-100 translate-y-0"
-                          : "opacity-0 translate-y-1"
-                      }`}
-                    >
-                      With our free plan, you can create up to 3 forms with AI. If you
-                      need more, our Pro plan offers unlimited AI-powered form
-                      creation. You can create unlimited manual forms on any plan.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* FAQ 2 */}
-            <div
-              className={`group rounded-2xl border border-gray-200/70 dark:border-gray-700/50 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm cursor-pointer transition-all duration-500 ease-[cubic-bezier(.2,.8,.2,1)] hover:bg-white/80 dark:hover:bg-gray-900/30 hover:shadow-md hover:shadow-gray-300/40 dark:hover:shadow-none focus-within:ring-2 focus-within:ring-green-500/20 focus-within:border-green-200 ${
-                openFaq === "customize" ? "shadow-xl shadow-gray-300/40 border-green-200" : ""
-              }`}
-            >
-              <button
-                type="button"
-                onClick={() =>
-                  setOpenFaq((prev) => (prev === "customize" ? null : "customize"))
-                }
-                className="flex w-full items-start sm:items-center gap-3 p-4 sm:p-6 font-semibold text-sm sm:text-base text-gray-900 dark:text-white text-left focus-visible:outline-none"
-              >
-                <HelpCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-1 sm:mt-0" />
-                <span className="flex-1">Can I customize the forms?</span>
-                <span
-                  className={`ml-3 transform transition-transform duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
-                    openFaq === "customize" ? "rotate-180" : ""
-                  }`}
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </span>
-              </button>
-              <div className="px-4 pb-4 sm:px-6 sm:pb-6">
-                {/* Content expansion uses a grid-rows transition to mimic
-                    auto-height; text also fades/slides for a smooth feel */}
-                <div
-                  className={`grid transition-[grid-template-rows] duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
-                    openFaq === "customize" ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <p
-                      className={`text-xs sm:text-sm text-gray-600 dark:text-gray-300 transition-all duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
-                        openFaq === "customize"
-                          ? "opacity-100 translate-y-0"
-                          : "opacity-0 translate-y-1"
-                      }`}
-                    >
-                      Absolutely! After the AI generates your form, you have full
-                      control to edit, add, remove, and reorder fields. You can also
-                      customize the title and description.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            {/* FAQ 3 */}
-            <div
-              className={`group rounded-2xl border border-gray-200/70 dark:border-gray-700/50 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm cursor-pointer transition-all duration-500 ease-[cubic-bezier(.2,.8,.2,1)] hover:bg-white/80 dark:hover:bg-gray-900/30 hover:shadow-md hover:shadow-gray-300/40 dark:hover:shadow-none focus-within:ring-2 focus-within:ring-green-500/20 focus-within:border-green-200 ${
-                openFaq === "submissions" ? "shadow-xl shadow-gray-300/40 border-green-200" : ""
-              }`}
-            >
-              <button
-                type="button"
-                onClick={() =>
-                  setOpenFaq((prev) =>
-                    prev === "submissions" ? null : "submissions"
-                  )
-                }
-                className="flex w-full items-start sm:items-center gap-3 p-4 sm:p-6 font-semibold text-sm sm:text-base text-gray-900 dark:text-white text-left focus-visible:outline-none"
-              >
-                <HelpCircle className="w-5 h-5 text-teal-500 flex-shrink-0 mt-1 sm:mt-0" />
-                <span className="flex-1">How do I see the submissions?</span>
-                <span
-                  className={`ml-3 transform transition-transform duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
-                    openFaq === "submissions" ? "rotate-180" : ""
-                  }`}
-                >
-                  <svg
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M6 9l6 6 6-6" />
-                  </svg>
-                </span>
-              </button>
-              <div className="px-4 pb-4 sm:px-6 sm:pb-6">
-                {/* Content expansion uses a grid-rows transition to mimic
-                    auto-height; text also fades/slides for a smooth feel */}
-                <div
-                  className={`grid transition-[grid-template-rows] duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
-                    openFaq === "submissions" ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
-                  }`}
-                >
-                  <div className="overflow-hidden">
-                    <p
-                      className={`text-xs sm:text-sm text-gray-600 dark:text-gray-300 transition-all duration-700 ease-[cubic-bezier(.16,.84,.44,1)] ${
-                        openFaq === "submissions"
-                          ? "opacity-100 translate-y-0"
-                          : "opacity-0 translate-y-1"
-                      }`}
-                    >
-                      All submissions for your forms are available in your dashboard.
-                      You can view individual submissions and see an overview in the
-                      analytics section.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <FaqSection />
 
         {/* Pricing Section */}
         <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
