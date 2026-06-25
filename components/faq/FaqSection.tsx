@@ -6,7 +6,7 @@ const FaqSection = () => {
   const [openFaq, setOpenFaq] = useState<"forms" | "customize" | "submissions" | "security" | "ai" | null>(null);
 
   return (
-    <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 text-gray-700 dark:text-gray-300">
+    <div id="faqs" className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20 text-gray-700 dark:text-gray-300">
       <div className="text-center mb-10 sm:mb-12 md:mb-16">
         <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-syne text-gray-900 dark:text-white tracking-tight leading-tight">
           Frequently Asked Questions
