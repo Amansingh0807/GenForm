@@ -1,14 +1,15 @@
 "use client";
 import React from "react";
 import { Button } from "./ui/button";
-import { ArrowRight, CheckCircle, Sparkles, Zap, Shield, Users, BarChart3, Clock, Edit } from "lucide-react";
+import { ArrowRight, CheckCircle, Sparkles, Zap } from "lucide-react";
 import Link from "next/link";
 import PricingPage from "./PricingPage";
 import Footer from "./Footer";
-import { StatCounter } from "./ui/StatCounter";
 import FaqSection from "./faq/FaqSection";
 import HowItWorks from "./landing/HowItWorks";
 import Testimonials from "./landing/Testimonials";
+import Features from "./landing/Features";
+import Stats from "./landing/Stats";
 
 interface LandingPageProps {
   userId?: string | null;
@@ -99,165 +100,16 @@ const LandingPage = ({ userId }: LandingPageProps) => {
           </div>
         </div>
 
-        {/* Features Section */}
-        <div id="features" className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
-          <div className="text-center mb-10 sm:mb-12 md:mb-16">
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-3 sm:mb-4">
-              Why Choose GenForm?
-            </h2>
-            <p className="text-base sm:text-lg md:text-xl text-gray-600 dark:text-gray-300 px-4">
-              Everything you need to create amazing forms
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16 md:mb-20">
-            {/* Feature 1 */}
-            <div
-              className="p-8 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-gray-700/40
- hover:shadow-md hover:shadow-gray-300/50 hover:-translate-y-1 transition-all duration-300"
-            >
-              <div className="w-14 h-14 bg-green-500 rounded-xl flex items-center justify-center mb-4">
-                <Zap className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                AI-Powered Generation
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Describe your form in plain English and watch AI create it
-                instantly with smart field suggestions.
-              </p>
-            </div>
-
-            {/* Feature 2 */}
-            <div
-              className="p-8 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-gray-700/40
- hover:shadow-md hover:shadow-gray-300/50 hover:-translate-y-1 transition-all duration-300"
-            >
-              <div className="w-14 h-14 bg-indigo-600 rounded-xl flex items-center justify-center mb-4">
-                <Shield className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                Secure & Reliable
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Enterprise-grade security with encrypted data storage. Your
-                forms and submissions are always safe.
-              </p>
-            </div>
-
-            {/* Feature 3 */}
-            <div
-              className="p-8 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-gray-700/40
- hover:shadow-md hover:shadow-gray-300/50 hover:-translate-y-1  transition-all duration-300"
-            >
-              <div className="w-14 h-14 bg-teal-500 rounded-xl flex items-center justify-center mb-4">
-                <Users className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                Easy Sharing
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Share your forms anywhere with one click. WhatsApp, Email,
-                LinkedIn, and more platforms supported.
-              </p>
-            </div>
-
-            {/* Feature 4 */}
-            <div
-              className="p-6 sm:p-8 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-gray-700/40
- hover:shadow-md hover:shadow-gray-300/50 hover:-translate-y-1 transition-all duration-300"
-            >
-              <div className="w-14 h-14 bg-green-500 rounded-xl flex items-center justify-center mb-4">
-                <Edit className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3">
-                Fully Customizable
-              </h3>
-              <p className="text-sm sm:text-base text-gray-600 dark:text-gray-300">
-                Edit, add, remove, and reorder fields with ease. Make your forms
-                exactly how you want them.
-              </p>
-            </div>
-
-            {/* Feature 5 */}
-            <div
-              className="p-8 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-gray-700/40
- hover:shadow-md hover:shadow-gray-300/50 hover:-translate-y-1 transition-all duration-300"
-            >
-              <div className="w-14 h-14 bg-indigo-600 rounded-xl flex items-center justify-center mb-4">
-                <BarChart3 className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                Analytics Dashboard
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Track submissions, analyze responses, and gain insights with our
-                comprehensive analytics tools.
-              </p>
-            </div>
-
-            {/* Feature 6 */}
-            <div
-              className="p-8 bg-white/60 dark:bg-gray-800/60 backdrop-blur-sm rounded-2xl border border-gray-200 dark:border-gray-700/40
- hover:shadow-md hover:shadow-gray-300/50 hover:-translate-y-1 transition-all duration-300"
-            >
-              <div className="w-14 h-14 bg-teal-500 rounded-xl flex items-center justify-center mb-4">
-                <Clock className="w-7 h-7 text-white" />
-              </div>
-              <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-3">
-                Save Time
-              </h3>
-              <p className="text-gray-600 dark:text-gray-300">
-                Create forms in seconds, not hours. Our AI understands your
-                needs and builds forms instantly.
-              </p>
-            </div>
-          </div>
+        <Features />
 
           {/* How It Works Section */}
           <HowItWorks />
 
-          {/* Stats Section */}
-          <div className="relative group bg-green-500 animate-breathe rounded-2xl sm:rounded-3xl p-6 sm:p-10 md:p-12 mb-12 sm:mb-16 md:mb-20 shadow-2xl shadow-green-500/20 transition-all shadow-xl duration-500 hover:scale-[1.02] border border-white/10 hover:border-white ">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center text-white">
-              <div>
-                <div className="text-4xl font-bold">
-                  <StatCounter endValue={1} suffix="k+" />
-                </div>
-                <div className="text-xs sm:text-sm md:text-base text-green-50">
-                  Forms Created
-                </div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold">
-                  <StatCounter endValue={500} suffix="+" />
-                </div>
-                <div className="text-xs sm:text-sm md:text-base text-green-50">
-                  Happy Users
-                </div>
-              </div>
-              <div>
-                <div className="text-4xl font-bold">
-                  <StatCounter endValue={99.9} suffix="%" decimals={1} />
-                </div>
-                <div className="text-xs sm:text-sm md:text-base text-green-50">
-                  Uptime
-                </div>
-              </div>
-              <div>
-                <div className="text-3xl sm:text-4xl md:text-5xl font-bold mb-1 sm:mb-2">
-                  Max
-                </div>
-                <div className="text-xs sm:text-sm md:text-base text-green-50">
-                  Support
-                </div>
-              </div>
-            </div>
-          </div>
+          <Stats />
+
 
           {/* Testimonials Section */}
           <Testimonials />
-        </div>
 
         <FaqSection />
 
