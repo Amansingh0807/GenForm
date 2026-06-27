@@ -45,7 +45,7 @@ export const ActiveNavbar = () => {
   }, []);
 
   return (
-    <div className="hidden md:flex items-center gap-1 mx-auto bg-white/90 dark:bg-slate-900/90 border border-slate-200 dark:border-slate-700 backdrop-blur-md rounded-full px-1 py-1">
+    <div className="hidden md:flex items-center gap-1 mx-auto bg-slate-100/60 dark:bg-gray-900/60 border border-slate-200/80 dark:border-gray-800/80 backdrop-blur-md rounded-full px-1.5 py-1">
       {navItems.map((item) => {
         const isActive = activeSection === item.href.replace("#", "");
         return (
@@ -54,8 +54,8 @@ export const ActiveNavbar = () => {
             href={item.href}
             className={`text-sm font-medium px-4 py-2 rounded-full transition-all duration-300 ${
               isActive
-                ? "bg-green-500 text-white shadow-md shadow-green-500/20" 
-                : "text-slate-600 dark:text-slate-300 hover:text-slate-900 dark:hover:text-white hover:bg-slate-100 dark:hover:bg-slate-800"
+                ? "bg-emerald-600 text-white font-syne font-bold shadow-md shadow-emerald-600/10 hover:bg-emerald-500" 
+                : "text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white hover:bg-slate-200/50 dark:hover:bg-gray-800/50"
             }`}
           >
             {item.name}
