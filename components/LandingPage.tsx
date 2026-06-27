@@ -10,6 +10,7 @@ import HowItWorks from "./landing/HowItWorks";
 import Testimonials from "./landing/Testimonials";
 import Features from "./landing/Features";
 import Stats from "./landing/Stats";
+import HeroSection from "./landing/HeroSection";
 
 interface LandingPageProps {
   userId?: string | null;
@@ -25,80 +26,7 @@ const LandingPage = ({ userId }: LandingPageProps) => {
     <div id="home" className="min-h-screen">
       {/* Hero Section with Background Pattern */}
       <div className="relative overflow-hidden bg-white dark:bg-gray-950">
-        {/* Animated Background Elements */}
-        <div className="absolute inset-0 overflow-hidden">
-          <div className="absolute -top-40 -right-32 w-80 h-80 rounded-full bg-green-500/10 dark:bg-green-500/5 blur-3xl animate-pulse"></div>
-          <div className="absolute -bottom-40 -left-32 w-80 h-80 rounded-full bg-emerald-500/10 dark:bg-emerald-500/5 blur-3xl animate-pulse delay-2000"></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-teal-500/5 dark:bg-teal-500/5 blur-3xl animate-pulse delay-1000"></div>
-        </div>
-
-        {/* Main Hero Content */}
-        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 md:py-20">
-          <div className="text-center">
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 sm:px-4 sm:py-2 rounded-full bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-300 mb-6 sm:mb-8">
-              <Sparkles className="w-3 h-3 sm:w-4 sm:h-4" />
-              <span className="text-xs sm:text-sm font-medium">
-                AI-Powered Form Builder
-              </span>
-            </div>
-
-            {/* Main Heading */}
-            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 px-2">
-              Create Forms in
-              <span className="text-green-500 dark:text-green-400">
-                {" "}
-                Seconds
-              </span>
-            </h1>
-
-            {/* Subheading */}
-            <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 mb-6 sm:mb-8 max-w-3xl mx-auto px-4">
-              Transform your ideas into beautiful, functional forms with the
-              power of AI. No coding required.
-            </p>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mb-12 sm:mb-16 px-4">
-              <Link
-                href={userId ? "/dashboard/analytics" : "/sign-up"}
-                className="w-full sm:w-auto"
-              >
-                <Button
-                  size="lg"
-                  className="w-full sm:w-auto bg-green-500 hover:bg-green-600 text-white px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg shadow-lg shadow-green-500/30"
-                >
-                  {userId ? "Go to Dashboard" : "Start Creating Free"}
-                  <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5" />
-                </Button>
-              </Link>
-              <Link href="/demo" className="w-full sm:w-auto">
-
-                {/* <Link href="/dashboard/forms" className="w-full sm:w-auto"> */}
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="w-full sm:w-auto px-6 sm:px-8 py-5 sm:py-6 text-base sm:text-lg border-green-500 text-green-500 hover:bg-green-50 dark:hover:bg-green-900/10"
-                >
-                  <Sparkles className="mr-2 w-4 h-4 sm:w-5 sm:h-5" />
-                  See a Demo form
-                </Button>
-              </Link>
-            </div>
-
-            {/* Trust Indicators */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 text-xs sm:text-sm text-gray-600 dark:text-gray-400">
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500" />
-                <span>Safe and Secure</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <CheckCircle className="w-4 h-4 sm:w-5 sm:h-5 text-green-500" />
-                <span>Freemium plans</span>
-              </div>
-            </div>
-          </div>
-        </div>
+        <HeroSection userId={userId} />
 
         <Features />
 
