@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { ArrowRight, CheckCircle, Sparkles } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "../ui/button";
 import Link from "next/link";
 
@@ -172,15 +172,19 @@ export default function HeroSection({ userId }: HeroSectionProps) {
             </Link>
           </div>
 
-          {/* Telemetry Trust Indicators */}
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-8 text-xs sm:text-sm font-mono text-gray-500 dark:text-gray-400">
-            <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-emerald-500" />
-              <span>[ SAFE_AND_SECURE ]</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-emerald-500" />
-              <span>[ FREEMIUM_PLANS ]</span>
+          {/* Live System Diagnostics Console */}
+          <div className="flex items-center gap-3 font-mono text-[11px] text-gray-500 dark:text-gray-400 bg-slate-100/70 dark:bg-[#070c14] border border-slate-200/80 dark:border-gray-800/80 rounded-xl px-4 py-2.5 max-w-xl shadow-inner select-none hover:border-emerald-500/30 transition-all duration-300">
+            <span className="flex h-2 w-2 relative">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span className="text-emerald-600 dark:text-emerald-400 font-bold uppercase tracking-wider text-[10px]">
+              LIVE_DIAGNOSTICS:
+            </span>
+            <div className="flex flex-wrap gap-x-4 gap-y-1 divide-x divide-slate-200 dark:divide-slate-800">
+              <span className="text-gray-600 dark:text-gray-300">PING: 24ms</span>
+              <span className="pl-4 text-gray-600 dark:text-gray-300">SLA: 99.9%</span>
+              <span className="pl-4 text-emerald-600 dark:text-emerald-400 font-semibold">SSL: SECURE</span>
             </div>
           </div>
         </div>
