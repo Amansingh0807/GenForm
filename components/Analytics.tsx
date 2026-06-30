@@ -1,19 +1,13 @@
 import React from "react";
 import {
-  Card,
-  CardContent, 
-  CardHeader,
-  CardTitle,
-} from "./ui/card"; 
-import { 
-  TrendingUp, 
-  TrendingDown, 
-  FileText, 
-  Send, 
-  CheckCircle, 
+  TrendingUp,
+  TrendingDown,
+  FileText,
+  Send,
+  CheckCircle,
   BarChart3,
   Activity,
-  Clock
+  Clock,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -42,16 +36,20 @@ type AnalyticsData = {
 
 type Props = {
   data: AnalyticsData | null;
-}
+};
 
-const cardHover =
-  "transition-all duration-300 ease-out hover:-translate-y-1 hover:scale-[1.01] hover:shadow-xl dark:hover:shadow-black/40";
+const glassCard =
+  "relative overflow-hidden bg-white/60 dark:bg-slate-900/45 border border-slate-200/80 dark:border-slate-800/80 rounded-2xl p-6 backdrop-blur-sm transition-all duration-300 hover:border-emerald-500/30 dark:hover:border-emerald-500/20 hover:shadow-lg dark:hover:shadow-none hover:-translate-y-1";
 
 const Analytics: React.FC<Props> = ({ data }) => {
   if (!data) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <p className="text-gray-500">No analytics data available</p>
+      <div className="flex items-center justify-center min-h-[60vh] font-sans text-sm text-gray-500 select-none">
+        <span className="flex h-2 w-2 relative mr-2">
+          <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+          <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+        </span>
+        No diagnostics data available
       </div>
     );
   }
@@ -67,191 +65,229 @@ const Analytics: React.FC<Props> = ({ data }) => {
     return `${days}d ago`;
   };
 
-  const maxSubmissions = Math.max(...data.submissionsByDay.map(d => d.count), 1);
+  const maxSubmissions = Math.max(
+    ...data.submissionsByDay.map((d) => d.count),
+    1
+  );
 
   return (
-    <div className="p-4 sm:p-6 lg:p-8 space-y-6 sm:space-y-8">
+    <div className="p-4 sm:p-6 lg:p-8 space-y-8 max-w-7xl mx-auto">
       {/* Header */}
-      <div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white mb-2">
+      <div className="space-y-1">
+        <h1 className="text-2xl sm:text-3xl font-extrabold font-syne text-gray-900 dark:text-white mb-1 tracking-tight">
           Analytics Dashboard
         </h1>
-        <p className="text-sm sm:text-base text-gray-600 dark:text-gray-400">
-          Track your form performance and engagement
+        <p className="text-xs sm:text-sm text-gray-500 dark:text-gray-400 font-sans">
+          Track and orchestrate your form engagement telemetries in real-time.
         </p>
       </div>
 
-      {/* Key Metrics */}
+      {/* Key Metrics Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-        <Card className={`border-l-4 border-l-green-500 ${cardHover}`}>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
+        {/* Card 1: Total Forms */}
+        <div className={glassCard}>
+          <div className="flex items-center justify-between pb-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 font-syne">
               Total Forms
-            </CardTitle>
-            <FileText className="w-5 h-5 text-green-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold">{data.totalForms}</div>
-            <p className="text-xs text-gray-500">{data.publishedForms} published</p>
-          </CardContent>
-        </Card>
+            </h4>
+            <FileText className="w-4 h-4 text-emerald-500" />
+          </div>
+          <div className="text-3xl font-extrabold font-syne text-gray-900 dark:text-white mt-1">
+            {data.totalForms}
+          </div>
+          <p className="text-[10px] font-sans text-emerald-600 dark:text-emerald-400 mt-2">
+            {data.publishedForms} active in production
+          </p>
+        </div>
 
-        <Card className={`border-l-4 border-l-emerald-500 ${cardHover}`}>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
+        {/* Card 2: Total Submissions */}
+        <div className={glassCard}>
+          <div className="flex items-center justify-between pb-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 font-syne">
               Total Submissions
-            </CardTitle>
-            <Send className="w-5 h-5 text-emerald-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold">{data.totalSubmissions}</div>
-            <div className="flex items-center gap-1 mt-1">
-              {data.growthPercentage >= 0 ? (
-                <TrendingUp className="w-3 h-3 text-green-500" />
-              ) : (
-                <TrendingDown className="w-3 h-3 text-red-500" />
-              )}
-              <p className={`text-xs ${data.growthPercentage >= 0 ? "text-green-500" : "text-red-500"}`}>
-                {Math.abs(data.growthPercentage)}% vs last week
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-
-        <Card className={`border-l-4 border-l-teal-500 ${cardHover}`}>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
-              Published Forms
-            </CardTitle>
-            <CheckCircle className="w-5 h-5 text-teal-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold">{data.publishedForms}</div>
-            <p className="text-xs text-gray-500">
-              {data.totalForms - data.publishedForms} drafts
+            </h4>
+            <Send className="w-4 h-4 text-emerald-500" />
+          </div>
+          <div className="text-3xl font-extrabold font-syne text-gray-900 dark:text-white mt-1">
+            {data.totalSubmissions}
+          </div>
+          <div className="flex items-center gap-1 mt-2 font-sans text-[10px]">
+            {/* {data.growthPercentage >= 0 ? (
+              <TrendingUp className="w-3 h-3 text-emerald-500" />
+            ) : (
+              <TrendingDown className="w-3 h-3 text-red-500" />
+            )} */}
+            <p
+              className={`${data.growthPercentage >= 0 ? "text-emerald-600 dark:text-emerald-400" : "text-red-500"}`}
+            >
+              {data.growthPercentage >= 0 ? "+" : ""}
+              {data.growthPercentage}% weekly delta
             </p>
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card className={`border-l-4 border-l-blue-500 ${cardHover}`}>
-          <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium text-gray-600 dark:text-gray-400">
-              Avg per Form
-            </CardTitle>
-            <BarChart3 className="w-5 h-5 text-blue-500" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold">{data.avgSubmissionsPerForm}</div>
-            <p className="text-xs text-gray-500">submissions/form</p>
-          </CardContent>
-        </Card>
+        {/* Card 3: Published Forms */}
+        <div className={glassCard}>
+          <div className="flex items-center justify-between pb-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 font-syne">
+              Published Forms
+            </h4>
+            <CheckCircle className="w-4 h-4 text-emerald-500" />
+          </div>
+          <div className="text-3xl font-extrabold font-syne text-gray-900 dark:text-white mt-1">
+            {data.publishedForms}
+          </div>
+          <p className="text-[10px] font-sans text-gray-400 dark:text-gray-500 mt-2">
+            {data.totalForms - data.publishedForms} drafts locked
+          </p>
+        </div>
+
+        {/* Card 4: Avg per Form */}
+        <div className={glassCard}>
+          <div className="flex items-center justify-between pb-2">
+            <h4 className="text-xs font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400 font-syne">
+              Avg Submissions
+            </h4>
+            <BarChart3 className="w-4 h-4 text-emerald-500" />
+          </div>
+          <div className="text-3xl font-extrabold font-syne text-gray-900 dark:text-white mt-1">
+            {data.avgSubmissionsPerForm}
+          </div>
+          <p className="text-[10px] font-sans text-emerald-600 dark:text-emerald-400 mt-2">
+            engagements per node
+          </p>
+        </div>
       </div>
 
       {/* Charts + Lists */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <Card className={cardHover}>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Activity className="w-5 h-5 text-green-500" />
-              Last 7 Days Activity
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
+        {/* Activity Chart Card */}
+        <div className={glassCard}>
+          <div className="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800/80 pb-4 mb-4">
+            <h3 className="font-syne font-bold text-base text-gray-900 dark:text-white flex items-center gap-2">
+              <Activity className="w-4.5 h-4.5 text-emerald-500" />
+              7-Day Activity Stream
+            </h3>
+          </div>
+          <div className="space-y-4">
             {data.submissionsByDay.map((day, i) => (
               <div key={i} className="flex items-center gap-3">
-                <span className="text-xs w-16 text-gray-500">{day.date}</span>
-                <div className="flex-1 bg-gray-100 dark:bg-gray-800 rounded-full h-7">
+                <span className="text-xs w-16 text-gray-400 dark:text-gray-500 font-mono">
+                  {day.date}
+                </span>
+                <div className="flex-1 bg-slate-100 dark:bg-gray-800/80 border border-slate-200/40 dark:border-slate-800/40 rounded-full h-6 overflow-hidden">
                   <div
-                    className="h-full rounded-full bg-gradient-to-r from-green-500 to-emerald-500 flex items-center justify-end pr-2"
+                    className="h-full rounded-full bg-gradient-to-r from-emerald-600 to-teal-500 flex items-center justify-end pr-3 transition-all duration-500"
                     style={{ width: `${(day.count / maxSubmissions) * 100}%` }}
                   >
                     {day.count > 0 && (
-                      <span className="text-xs font-semibold text-white">{day.count}</span>
+                      <span className="text-[10px] font-mono font-bold text-white">
+                        {day.count}
+                      </span>
                     )}
                   </div>
                 </div>
               </div>
             ))}
-          </CardContent>
-        </Card>
+          </div>
+        </div>
 
-        <Card className={cardHover}>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <BarChart3 className="w-5 h-5 text-emerald-500" />
-              Top Performing Forms
-            </CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-3">
+        {/* Top Forms Card */}
+        <div className={glassCard}>
+          <div className="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800/80 pb-4 mb-4">
+            <h3 className="font-syne font-bold text-base text-gray-900 dark:text-white flex items-center gap-2">
+              <BarChart3 className="w-4.5 h-4.5 text-emerald-500" />
+              Top Nodes by Response
+            </h3>
+          </div>
+          <div className="space-y-3">
             {data.topForms.length > 0 ? (
               <>
                 {data.topForms.map((form, i) => (
                   <Link
                     key={form.id}
                     href={`/dashboard/forms/${form.id}/submissions`}
-                    className="block p-3 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                    className="group block p-3.5 bg-slate-50/50 dark:bg-[#070c14]/40 border border-slate-150 dark:border-slate-900/60 rounded-xl hover:border-emerald-500/30 hover:bg-white dark:hover:bg-gray-950/60 transition-all duration-300"
                   >
                     <div className="flex justify-between items-center">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center text-sm font-bold">
-                          {i + 1}
-                        </div>
+                        <span className="font-syne text-xs font-bold text-emerald-600 dark:text-emerald-400">
+                          {i + 1}.
+                        </span>
                         <div>
-                          <p className="text-sm font-medium truncate">{form.title}</p>
-                          <p className="text-xs text-gray-500">{form.published ? "Published" : "Draft"}</p>
+                          <p className="text-sm font-semibold font-syne text-gray-800 dark:text-gray-200 group-hover:text-gray-950 dark:group-hover:text-white transition-colors">
+                            {form.title}
+                          </p>
+                          <p className="text-[10px] font-sans text-gray-400 dark:text-gray-500">
+                            {form.published ? "Published" : "Draft"}
+                          </p>
                         </div>
                       </div>
                       <div className="text-right">
-                        <p className="text-lg font-bold text-green-500">{form.submissions}</p>
-                        <p className="text-xs text-gray-500">responses</p>
+                        <p className="text-lg font-extrabold font-syne text-emerald-500">
+                          {form.submissions}
+                        </p>
+                        <p className="text-[9px] font-sans uppercase text-gray-400 dark:text-gray-500">
+                          responses
+                        </p>
                       </div>
                     </div>
                   </Link>
                 ))}
               </>
             ) : (
-              <div className="text-center py-8 text-gray-500">
-                <FileText className="w-12 h-12 mx-auto mb-2 opacity-50" />
-                <p className="text-sm">No forms yet</p>
+              <div className="text-center py-12 text-gray-450 dark:text-gray-500">
+                <FileText className="w-8 h-8 mx-auto mb-2 opacity-40 animate-pulse" />
+                <p className="text-xs font-sans">No active forms found</p>
               </div>
             )}
-          </CardContent>
-        </Card>
+          </div>
+        </div>
       </div>
 
-      <Card className={cardHover}>
-        <CardHeader>
-          <CardTitle className="flex items-center gap-2">
-            <Clock className="w-5 h-5 text-teal-500" />
-            Recent Activity
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="space-y-3">
+      {/* Recent Activity Card */}
+      <div className={glassCard}>
+        <div className="flex items-center justify-between border-b border-slate-200/60 dark:border-slate-800/80 pb-4 mb-4">
+          <h3 className="font-syne font-bold text-base text-gray-900 dark:text-white flex items-center gap-2">
+            <Clock className="w-4.5 h-4.5 text-emerald-500" />
+            System Live Activity Stream
+          </h3>
+        </div>
+        <div className="space-y-3">
           {data.recentActivity.length > 0 ? (
             <>
-              {data.recentActivity.map(a => (
+              {data.recentActivity.map((a) => (
                 <Link
                   key={a.id}
                   href={`/dashboard/forms/${a.formId}/submissions`}
-                  className="flex justify-between p-3 rounded-lg bg-gray-50 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 transition"
+                  className="group flex justify-between items-center p-3.5 bg-slate-50/50 dark:bg-[#070c14]/40 border border-slate-150 dark:border-slate-900/60 rounded-xl hover:border-emerald-500/30 hover:bg-white dark:hover:bg-gray-950/60 transition-all duration-300"
                 >
-                  <div>
-                    <p className="text-sm font-medium">
-                      New submission to <span className="text-green-500">{a.formTitle}</span>
+                  <div className="flex items-center gap-3">
+                    <span className="flex h-2 w-2 relative">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                    </span>
+                    <p className="text-sm font-semibold text-gray-800 dark:text-gray-200">
+                      Incoming submission directed to{" "}
+                      <span className="text-emerald-500 font-syne">
+                        {a.formTitle}
+                      </span>
                     </p>
-                    <p className="text-xs text-gray-500">{getTimeAgo(a.createdAt)}</p>
                   </div>
+                  <span className="text-[10px] font-sans text-gray-400 dark:text-gray-500">
+                    {getTimeAgo(a.createdAt)}
+                  </span>
                 </Link>
               ))}
             </>
           ) : (
-            <div className="text-center py-8 text-gray-500">
-              <Activity className="w-12 h-12 mx-auto mb-2 opacity-50" />
-              <p className="text-sm">No recent activity</p>
+            <div className="text-center py-12 text-gray-450 dark:text-gray-500">
+              <Activity className="w-8 h-8 mx-auto mb-2 opacity-40 animate-pulse" />
+              <p className="text-xs font-sans">No recent activity recorded</p>
             </div>
           )}
-        </CardContent>
-      </Card>
+        </div>
+      </div>
     </div>
   );
 };
