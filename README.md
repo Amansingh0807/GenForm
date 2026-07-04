@@ -367,6 +367,50 @@ npm run dev
 
 Visit [http://localhost:3000](http://localhost:3000) 🎉
 
+### 🐳 Docker Deployment Guide
+
+For production deployments or containerized environments, you can package and run GenForm using Docker.
+
+#### 1. Prerequisites
+Ensure you have Docker installed on your host system.
+
+#### 2. Create local environment configurations
+Before running the container, ensure your `.env` file contains all the necessary API keys (Clerk, Stripe, Gemini, and Database URLs).
+
+#### 3. Build the Docker Image
+Run the following command in the project root to build the production image using our optimized multi-stage `Dockerfile`:
+
+```bash
+docker build -t genform-app:latest .
+```
+
+#### 4. Run the Container
+You can run the container by mapping the host port and loading your `.env` file directly:
+
+```bash
+docker run -d \
+  -p 3000:3000 \
+  --env-file .env \
+  --name genform-service \
+  genform-app:latest
+```
+
+*Or pass the environment variables individually using `-e` flags:*
+
+```bash
+docker run -d \
+  -p 3000:3000 \
+  -e DATABASE_URL="your_postgresql_connection_url" \
+  -e NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="your_clerk_pub_key" \
+  -e CLERK_SECRET_KEY="your_clerk_secret_key" \
+  -e GEMINI_API_KEY="your_gemini_key" \
+  --name genform-service \
+  genform-app:latest
+```
+
+#### 5. Database Setup inside Docker
+The Docker container is pre-configured to automatically apply active migrations (`npx prisma migrate deploy`) to your database when it initializes, ensuring your database schema is up-to-date.
+
 ---
 
 ## 📖 Usage Guide
